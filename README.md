@@ -1,21 +1,23 @@
 OpenCV-Max-Build-Package-
 =========================
-
+when coming from a fresh install, packages for 
 (or close to it) Ubuntu 13.10, CUDA, TBB IPP Ocl etc
 
-autoconf2.13 autoconf-archive gnu-standards autoconf-doc libtool automake1.9-doc procmail graphviz default-mta gfortran
-sudo apt-get install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
-sudo apt-get install python-dev
-sudo apt-get install libgmp10 
-sudo apt-get install git cmake-gui
+sudo apt-get install autoconf2.13 autoconf-archive gnu-standards \n
+sudo apt-get install libtool graphviz default-mta gfortran \n
+sudo apt-get install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev \n
+sudo apt-get install python-dev \n
+sudo apt-get install libgmp10 \n
+sudo apt-get install git cmake-gui \n
 .................................................................................
-sudo apt-get remove nvidia*
+...maybe not just yet........  sudo apt-get remove nvidia*
 ............................ NVIDIA STUFF  - DANGEROUS .................................
 
 sudo apt-get upgrade
-sudo apt-get -y remove ffmpeg x264 libx264-dev
 
+sudo apt-get -y remove ffmpeg x264 libx264-dev
 sudo apt-get -y install libopencv-dev
+.........probably reboot here............
 sudo apt-get -y install build-essential checkinstall cmake pkg-config yasm
 sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev
 sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev
