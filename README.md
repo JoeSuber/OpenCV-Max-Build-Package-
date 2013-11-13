@@ -69,6 +69,7 @@ perl init-repository --no-webkit
 
     -- now check on previous installs of QT - no environment variables like QMAKEPATH or QMAKEFEATURES
     -- $HOME/.config/Trolltech/QMake.conf should be empty
+    -- openCV (cmake-gui) will want  --> $HOME/qt5/qtbase/lib/cmake/Qt5...
 
 ./configure -developer-build -opensource -nomake examples -nomake tests -no-gtkstyle -confirm-license
 make -j4
