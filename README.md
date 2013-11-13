@@ -1,14 +1,14 @@
 OpenCV-Max-Build-Package-
 =========================
 when coming from a fresh install, packages for 
-(or close to it) Ubuntu 13.10, CUDA, TBB IPP Ocl etc
+(or close to it) Ubuntu 13.10, CUDA, TBB Ocl etc
 
-sudo apt-get install autoconf2.13 autoconf-archive gnu-standards \n
-sudo apt-get install libtool graphviz default-mta gfortran \n
-sudo apt-get install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev \n
-sudo apt-get install python-dev \n
-sudo apt-get install libgmp10 \n
-sudo apt-get install git cmake-gui \n
+sudo apt-get install autoconf2.13 autoconf-archive gnu-standards
+sudo apt-get install libtool graphviz default-mta gfortran libgmp10
+sudo apt-get install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
+sudo apt-get install python-dev
+sudo apt-get install git cmake-gui
+
 .................................................................................
 ...maybe not just yet........  sudo apt-get remove nvidia*
 ............................ NVIDIA STUFF  - DANGEROUS .................................
