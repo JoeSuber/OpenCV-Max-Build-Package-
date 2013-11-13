@@ -36,6 +36,7 @@ sudo apt-get -y install x264 v4l-utils ffmpeg
 sudo apt-get -y install libgstreamer*
 
 sudo apt-get -y install python-symeig
+
 sudo apt-get install freeglut3 freeglut3-dev build-essential \
     libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx \
     libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4 \
