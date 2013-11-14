@@ -3,8 +3,9 @@ OpenCV-Max-Build-Package-
 
     -- when coming from a fresh install, packages for setting up a fat full-featured build
     
-IPP is not on here due to lack of package-managed install and new Open CL stuff may 
-be as good... still need to test that idea.
+IPP is not on here due to a lack of package-managed install and new Open CL stuff may 
+be as good... still need to test that idea. If using IPP, use 7.1 version with static add-on.
+8.0 leaves out certain depreciated parts that OpenCV still needs.
 
 todo: describe the pros & cons of cmake-gui options
 
@@ -14,7 +15,7 @@ CUDA-5.5 was just added to the regular synaptic stuff
 
 only tested on Ubuntu 13.10, CUDA 5.5, with most everything turned on
 
---- Here Goes ----
+--- I would do these 1 or 2 at a time to witness results ----
 
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 
@@ -38,7 +39,7 @@ sudo apt-get -y remove ffmpeg x264 libx264-dev
 
 sudo apt-get -y install libopencv-dev
 
-........ above is older version...probably reboot here ............
+........ Above is older version. Changes nvidia driver. .probably reboot here ...........
 
 sudo apt-get -y install build-essential checkinstall cmake pkg-config yasm
 
