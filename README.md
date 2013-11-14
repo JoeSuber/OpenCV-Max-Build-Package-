@@ -12,6 +12,10 @@ todo: describe the pros & cons of cmake-gui options
 todo: test with openNI - I don't have a device
 
 CUDA-5.5 was just added to the regular synaptic stuff, so use that or aptitude to get the CUDA install if wanted
+very condensed cuda install instructions:
+
+$ export PATH=/usr/local/cuda-5.5/bin:$PATH
+$ export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
 
 only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
