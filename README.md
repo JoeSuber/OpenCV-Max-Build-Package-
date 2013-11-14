@@ -43,9 +43,9 @@ That being said, the following seems to be working well now circa Nov 11, 2013..
 
 Very condensed CUDA-5.5 install instructions:
 
-add this to your software providers:
+add a .deb install ppa from the official page:
 
-    http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1210/x86_64
+    https://developer.nvidia.com/cuda-downloads
 
 then use package-manager, like synaptic or aptitude, to run the update.  It will mess with the video driver, which is always a scary proposition, so be ready!
 
