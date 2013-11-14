@@ -22,7 +22,12 @@ sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libatlas-base-dev 
 
     -- as of this note, gfortran is used to build atlas, hence, numpy so if building your own:
-    -- 
+    -- git clone https://github.com/numpy/numpy.git
+    -- cd numpy
+    -- python setup.py build --fcompiler=gnu95
+    -- sudo python setup.py install
+        -- Then, test, assuming nose is installed:
+    -- python -c 'import numpy; numpy.test()'
 
 sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
