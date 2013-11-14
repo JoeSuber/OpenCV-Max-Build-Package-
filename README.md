@@ -19,7 +19,10 @@ only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 
-sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10
+sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libatlas-base-dev 
+
+    -- as of this note, gfortran is used to build atlas, hence, numpy so if building your own:
+    -- 
 
 sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
