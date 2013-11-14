@@ -6,10 +6,15 @@ OpenCV-Max-Build-Package-
 IPP is not on here due to lack of package-managed install and new Open CL stuff may 
 be as good... still need to test that idea.
 
+todo: describe the pros & cons of cmake-gui options
+
+todo: test with openNI - I don't have a device
+
 CUDA-5.5 was just added to the regular synaptic stuff
 
-only tested on Ubuntu 13.10, CUDA, TBB Ocl etc
+only tested on Ubuntu 13.10, CUDA 5.5, with most everything turned on
 
+--- Here Goes ----
 
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 
@@ -21,8 +26,10 @@ sudo apt-get -y install python-dev
 
 sudo apt-get -y install git cmake-gui
 
-.................................................................................
-...maybe not just yet........  sudo apt-get remove nvidia*
+.........................  CAREFUL    .................................................
+
+... maybe not just yet ........  sudo apt-get remove nvidia*
+
 ............................ NVIDIA STUFF  - DANGEROUS .................................
 
 sudo apt-get upgrade
@@ -31,7 +38,7 @@ sudo apt-get -y remove ffmpeg x264 libx264-dev
 
 sudo apt-get -y install libopencv-dev
 
-........above is older version...probably reboot here............
+........ above is older version...probably reboot here ............
 
 sudo apt-get -y install build-essential checkinstall cmake pkg-config yasm
 
@@ -68,22 +75,33 @@ sudo apt-get install freeglut3 freeglut3-dev build-essential \
 
 sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
+----- the above libxcb stuff  somehow is not fully covered by anything else. ----------
+
 sudo apt-get install libicu-dev
 
 sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev libnetpbm latex2html ant ant-contrib 
 
+    -- For setting up CUDA-needed gcc versions 
+
 sudo update-alternatives --remove-all gcc
+
 sudo update-alternatives --config gcc
+
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 20
+
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 50
+
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60
+
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 10
+
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40
-sudo update-alternatives --config gcc      #choose 4.7.x
+
+sudo update-alternatives --config gcc      #choose 4.7.x or 4.8 for now
+
+    -- below link may be outdated... but maybe not
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/libglut.so
-
------ the above libxcb stuff  somehow is not fully covered by anything else. ----------
 
     ---if in need of latest QT5 - yeah, it takes a while, but provides best gui -----
 
