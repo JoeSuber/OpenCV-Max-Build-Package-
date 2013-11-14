@@ -23,7 +23,7 @@ sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10
 
 sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
-sudo apt-get -y install python-dev
+sudo apt-get -y install python-dev python-pip
 
 sudo apt-get -y install git cmake-gui
 
@@ -81,6 +81,8 @@ sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 sudo apt-get install libicu-dev
 
 sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
+
+sudo pip install gmpy   # not strictly required
 
     -- For setting up CUDA-needed gcc versions 
 
@@ -150,7 +152,7 @@ sudo update-alternatives --config gcc
 
 ................  clone into repo (default branch is master) git checkout 2.4 .........
 
-git https://github.com/Itseez/opencv.git
+git clone https://github.com/Itseez/opencv.git
 
 cd opencv
 
@@ -159,6 +161,17 @@ mkdir build
 cd build
 
 cmake-gui .
+
+    -- some cmake-gui hints, subject to change of course...
+    -- hint: check the boxes in top area to 'group entries' and 'show advanced'
+    -- don't use fast-math unless you probably don't need this guide & know better.
+    -- don't check 'download tbb' up top if you already have it, but make sure the path is true
+    -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
+    -- do check mark all of the SSE instruction sets (and AVX) if you have a modern CPU
+    -- after checking options you can press configure as many times as needed
+    -- just because the red highlight goes away doesn't mean it is fixed - look at the paths
+    -- If Intel, you still can use Open CL - but you benefit from TBB & IPP more than AMD
+    -- QT can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
 
