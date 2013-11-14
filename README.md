@@ -80,7 +80,7 @@ sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
 sudo apt-get install libicu-dev
 
-sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev libnetpbm latex2html ant ant-contrib 
+sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
 
     -- For setting up CUDA-needed gcc versions 
 
@@ -159,3 +159,11 @@ mkdir build
 cd build
 
 cmake-gui .
+
+---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
+
+sudo make -j4
+
+sudo make install
+
+
