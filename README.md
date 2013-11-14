@@ -11,13 +11,7 @@ todo: describe the pros & cons of cmake-gui options
 
 todo: test with openNI - I don't have a device
 
-CUDA-5.5 was just added to the regular synaptic stuff, so use that or aptitude to get the CUDA install if wanted
-very condensed cuda install instructions:
-
-$ export PATH=/usr/local/cuda-5.5/bin:$PATH
-$ export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
-
-only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
+The Following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
 --- I would do these 1 or 2 at a time to witness results ----
 
@@ -39,10 +33,27 @@ sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke
 
 sudo apt-get -y install git cmake cmake-gui python-gmpy
 
-.........................  CAREFUL    .................................................
+.........................  CAREFUL    ......  DANGER  ...................................
 
-... maybe not just yet ........  sudo apt-get remove nvidia*
+--- If playing with video drivers, be ready to loose everything on the partition ---
 
+--- At least have another way to get on the web and look stuff up ---
+
+That being said, the following seems to be working well now circa Nov 11, 2013...
+
+Very condensed CUDA-5.5 install instructions:
+
+add this to your software providers:
+
+    http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1210/x86_64
+
+then use package-manager, like synaptic or aptitude, to run the update.  It will mess with the video driver, which is always a scary proposition, so be ready!
+
+after that madness:
+
+    export PATH=/usr/local/cuda-5.5/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
+    
 ............................ NVIDIA STUFF  - DANGEROUS .................................
 
 sudo apt-get upgrade
