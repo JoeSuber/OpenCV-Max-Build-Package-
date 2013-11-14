@@ -170,3 +170,16 @@ sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 
 sudo ldconfig
 
+---- assume that all worked  ----
+
+python
+
+>>> import cv2
+
+>>> b = cv2.getBuildInformation().split('\n')
+
+>>> for l in b:
+
+>>>     print l
+
+--- (here you will get a whole bunch of info to verify the build.  ctrl-D to exit) ---
