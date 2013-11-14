@@ -47,7 +47,11 @@ add a .deb install ppa from the official page:
 
     https://developer.nvidia.com/cuda-downloads
 
-then use package-manager, like synaptic or aptitude, to run the update.  It will mess with the video driver, which is always a scary proposition, so be ready!
+then use package-manager, like synaptic or aptitude, to run the update.  
+
+cuda-repo-ubuntu1210
+
+It will mess with the video driver, which is always a scary proposition, so be ready!
 
 after that madness:
 
