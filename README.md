@@ -19,6 +19,8 @@ only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 
+sudo apt-get -y install python-dev python-pip 
+
 sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libatlas-base-dev 
 
     -- as of this note, gfortran is used to build atlas, hence, numpy so if building your own:
@@ -31,9 +33,7 @@ sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libatlas-
 
 sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
-sudo apt-get -y install python-dev python-pip
-
-sudo apt-get -y install git cmake-gui
+sudo apt-get -y install git cmake cmake-gui python-gmpy
 
 .........................  CAREFUL    .................................................
 
@@ -47,21 +47,21 @@ sudo apt-get -y remove ffmpeg x264 libx264-dev
 
 sudo apt-get -y install libopencv-dev
 
-........ Above is older version. Changes nvidia driver. .probably reboot here ...........
+........ Above is older version. Changes nvidia driver. .probably should reboot here ...........
 
-sudo apt-get -y install build-essential checkinstall cmake pkg-config yasm
+sudo apt-get -y install build-essential checkinstall pkg-config yasm
 
 sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev
 
 sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev
 
-sudo apt-get -y install python-pip doxygen
+sudo apt-get -y install doxygen
 
-sudo apt-get -y install python-gmpy libeigen3-dev
+sudo apt-get -y install libeigen3-dev
 
 sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev libopenexr6 libopenexr6-dev exrtools
 
-sudo apt-get -y install python-dev python-numpy libbz2-dev libcoin80
+sudo apt-get -y install libbz2-dev libcoin80
 
 sudo apt-get -y install libtbb-dev liborc-dev
 
@@ -69,7 +69,7 @@ sudo apt-get -y install libgtk2.0-dev libwebp4 libwebp-dev webp
 
 sudo apt-get -y install libfaac-dev libmp3lame-dev libtheora-dev libvorbis-dev
 
-sudo apt-get -y install libxine2-dev libxvidcore-dev libv4l-dev
+sudo apt-get -y install libxine-dev libxine2-dev libxvidcore-dev libv4l-dev
 
 sudo apt-get -y install x264 v4l-utils ffmpeg
 
@@ -90,7 +90,9 @@ sudo apt-get install libicu-dev
 
 sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
 
-sudo pip install gmpy   # not strictly required
+    -- # slightly newer gmpy not strictly required
+
+sudo pip install gmpy
 
     -- For setting up CUDA-needed gcc versions 
 
@@ -108,7 +110,7 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 10
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40
 
-sudo update-alternatives --config gcc      #choose 4.7.x or 4.8 for now
+sudo update-alternatives --config gcc       #choose 4.7.x or 4.8 for now
 
     -- below link may be outdated... but maybe not
 
