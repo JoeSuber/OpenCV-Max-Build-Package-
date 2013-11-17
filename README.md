@@ -204,6 +204,10 @@ sudo update-alternatives --config gcc
 
 git clone https://github.com/Itseez/opencv.git
 
+git clone https://github.com/Itseez/opencv_extra.git
+
+    -- include the optional 'extras' in cmake-gui under OPENCV --> ~/opencv_extra
+
 cd opencv
 
 ##### recommended option ##### =  git checkout 2.4 
@@ -234,6 +238,12 @@ cmake-gui .
     -- for QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
     -- after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit 'generate'
     -- OPENGL_xmesa_INCLUDE = /usr/lib/x86_64-linux-gnu/mesa
+    -- the many cuda addresses may not show up right away. if you get the script started sometimes it finds the rest:
+        CUDA_CUDART_LIBRARY --> /usr/local/cuda-5.5/lib64/libcudart.so
+        CUDA_NVCC_EXECUTABLE --> /usr/local/cuda-5.5/bin/nvcc
+        CUDA_nvcuvid_LIBRARY --> /usr/lib/nvidia-331/libnvcuvid.so
+        CUDA_cupti_LIBRARY --> /usr/local/cuda-5.5/extras/CUPTI/lib64/libcupti.so
+        CUDA_CUDA_LIBRARY --> /usr/lib/nvidia-331/libcuda.so
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
 
