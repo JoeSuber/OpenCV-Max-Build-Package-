@@ -107,8 +107,8 @@ add a .deb install ppa from the official CUDA page:
 then use package-manager, like synaptic (sudo apt-get install synaptic) or aptitude, to run the update.
 
     --when using Synaptic et. al. select Meta-Packages, not individual components
-    --trouble? make sure the ppa is added & you have hit update since ppa was added & that the new address was contacted by the update
-    
+    --trouble? make sure the ppa is added & you have hit update since ppa was added & that the new 
+    address was contacted by the update
 ###### OR ######
 If looking for an education, a Bachelor of Arts in video driver installation:
 
@@ -121,6 +121,7 @@ after that madness:
     export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
     
 ####  NVIDIA STUFF + Silly Salamander = DANGEROUS  ########
+(leaving danger zone)
 
 sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
 
