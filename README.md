@@ -6,16 +6,15 @@
     
 IPP (Intel Integrated Performance Primitives) library is not on here due to a lack of package-managed install. You have to get a (free-of-charge) license code from Intel. link below
 
-TBB (Intel Threaded Building Blocks) is very much worth it - (and it is open-source now) - use it!  
-But with IPP - I don't see a lot of improvements, but it will probably depend what your applications are and what other libraries are providing basic functions like resizing a picture or computing the FFT.
-But you can get yours:
-
     -- http://software.intel.com/en-us/non-commercial-software-development
+    
+TBB (Intel Threaded Building Blocks) is very much worth it - (and it is open-source now) - use it!  
+But with IPP - I don't see a lot of improvements. Its benefit will depend on what your applications are and what other libraries are providing basic functions like resizing a picture or computing the FFT.
 
 New Open CL stuff may be as good... still need to test that idea. If using IPP, use 7.1 version with static add-ons.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
-    todo: try to describe all the pros & cons of cmake-gui options
+    todo: try to understand all the pros & cons of cmake-gui options
     todo: test with openNI - I don't have a device
 
 The Following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
@@ -66,14 +65,14 @@ sudo apt-get -y install libfaac-dev libmp3lame-dev libtheora-dev libvorbis-dev
 
 sudo apt-get -y install x264 libxvidcore-dev libv4l-dev v4l-utils ffmpeg
 
-sudo apt-get -y install libgstreamer*
-
 sudo apt-get -y install freeglut3 freeglut3-dev build-essential \
     libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx \
     libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4 \
     linux-headers-generic linux-source
 
 sudo apt-get -y install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
+
+sudo apt-get -y install libgstreamer*
 
 sudo apt-get -y install libxine-dev
 
@@ -83,7 +82,7 @@ sudo apt-get -y install libxine2-dev
 
 --- If playing with video drivers, be ready to loose everything on the partition ---
 
---- Some Concepts - GRUB - fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7 - service lightdm stop
+--- Some Concepts: GRUB - fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7 - service lightdm stop
     
     -- it is nice to have a way to 'put it back like it was.' consider this:
     http://www.fsarchiver.org/QuickStart
@@ -93,7 +92,7 @@ sudo apt-get -y install libopencv-dev
 
 .... Above is older version. Changes video driver. Probably should reboot here .....
 
---- At least have another way to get on the web and look stuff up ---
+--- At least have another way to get on-line and look stuff up ---
 
 That being said, the following seems to be working well now circa Nov 17, 2013...
 
@@ -165,12 +164,13 @@ perl init-repository --no-webkit
 
 make -j4
 
-    -- notes:
+    -- QT5 notes:
     -- no 'make install' required as we used developer-build options
     -- also note lack of sudo or non-home activity
     -- want updates?  - may have to run ./configure again
-    -- need a cleaning before rebuild? - git submodule foreach --recursive "git clean -dfx"
-    (for updates / rebuilds / changing branches)
+    -- need a _deep_ cleaning before rebuild? 
+    git submodule foreach --recursive "git clean -dfx"
+    -- for updates / rebuilds / changing branches)
     git pull
     git submodule sync
     git submodule update --recursive
@@ -210,7 +210,8 @@ cmake-gui .
     -- some cmake-gui hints:
     -- don't go all OCD trying to fill in everything before you hit 'configure' at least once.
     -- initially, check the two boxes in top area to 'group entries' and 'show advanced'
-    -- MAKE: don't use fast-math unless you probably don't need this guide & know better.
+    -- MAKE: don't use fast-math for GCC or CUDA unless you probably don't need this guide & know better. eg:
+    -- http://stackoverflow.com/questions/11507440/does-use-fast-math-option-translate-sp-multiplications-to-intrinsics
     -- don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
     -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
     -- MAKE: do check mark all of the SSE instruction sets (and AVX) if you have a modern non-ARM CPU
@@ -222,8 +223,8 @@ cmake-gui .
     -- /usr/local/cuda or /usr/local/cuda-5-5 is your friend. also /usr/lib/nvidia-updates
     -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card
     -- CUDA: UNcheck attach to target
-    -- for QT you want  --> $HOME/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
-    -- after a 'configure' or 3, under MAKE, select Debug or Release build type
+    -- for QT-DIR options you want--> $HOME/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
+    -- after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit 'generate'
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
 
