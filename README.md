@@ -230,7 +230,8 @@ cmake-gui .
     -- /usr/local/cuda or /usr/local/cuda-5-5 is your friend. also /usr/lib/nvidia-updates
     -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card
     -- CUDA: UNcheck attach to target
-    -- for QT-DIR options you want--> $HOME/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
+    -- the qmake executable = ~/qt5/qtbase/bin/qmake
+    -- for QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
     -- after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit 'generate'
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
