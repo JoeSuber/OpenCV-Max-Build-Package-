@@ -31,42 +31,17 @@ sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke
         -- Then, test, assuming nose is installed:
     -- python -c 'import numpy; numpy.test()'
 
-sudo apt-get -y install git cmake cmake-gui python-gmpy
+sudo apt-get -y install git cmake cmake-gui
 
-.........................  CAREFUL    ......  DANGER  ...................................
+#####  WARNING  ###########################
 
---- If playing with video drivers, be ready to loose everything on the partition ---
+## sudo apt-get -y install libopencv-dev ##
 
---- At least have another way to get on the web and look stuff up ---
-
-That being said, the following seems to be working well now circa Nov 11, 2013...
-
-Very condensed CUDA-5.5 install instructions:
-
-add a .deb install ppa from the official page:
-
-    https://developer.nvidia.com/cuda-downloads
-
-then use package-manager, like synaptic or aptitude, to run the update.  
-
-cuda-repo-ubuntu1210
-
-It will mess with the video driver, which is always a scary proposition, so be ready!
-
-after that madness:
-
-    export PATH=/usr/local/cuda-5.5/bin:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
-    
-............................ NVIDIA STUFF  - DANGEROUS .................................
+.... Above is older version. Changes nvidia driver. .probably should reboot here .....
 
 sudo apt-get upgrade
 
 sudo apt-get -y remove ffmpeg x264 libx264-dev
-
-sudo apt-get -y install libopencv-dev
-
-........ Above is older version. Changes nvidia driver. .probably should reboot here ...........
 
 sudo apt-get -y install build-essential checkinstall pkg-config yasm
 
@@ -94,8 +69,6 @@ sudo apt-get -y install x264 v4l-utils ffmpeg
 
 sudo apt-get -y install libgstreamer*
 
-sudo apt-get -y install python-symeig
-
 sudo apt-get install freeglut3 freeglut3-dev build-essential \
     libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx \
     libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4 \
@@ -105,6 +78,41 @@ sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
 ----- the above libxcb stuff  somehow is not fully covered by anything else. ----------
 
+......... VIDEO DRIVERS ...........  CAREFUL    ......  DANGER  ...................................
+
+--- If playing with video drivers, be ready to loose everything on the partition ---
+    
+    -- it is nice to have a way to 'put it back like it was.' consider this:
+    http://www.fsarchiver.org/QuickStart
+
+--- At least have another way to get on the web and look stuff up ---
+
+That being said, the following seems to be working well now circa Nov 17, 2013...
+
+Very condensed CUDA-5.5 install instructions:
+
+    Drivers. How about some fresh crack?
+    nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
+    
+add a .deb install ppa from the official CUDA page:
+
+    https://developer.nvidia.com/cuda-downloads
+    select this -> cuda-repo-ubuntu1210   or  the 1204 version... CUDA 6 is coming
+
+then use package-manager, like synaptic or aptitude, to run the update.
+
+If looking for an education, a Bachelor of Arts in video driver installation:
+
+    sudo apt-get install cuda-5.5 nvidia-current nvidia-current-dev \
+                  nvidia-modprobe nvidia-settings
+
+after that madness:
+
+    export PATH=/usr/local/cuda-5.5/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
+    
+..................  NVIDIA STUFF + Linux = DANGEROUS .................................
+
 sudo apt-get install libicu-dev
 
 sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
@@ -113,7 +121,8 @@ sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libs
 
 sudo pip install gmpy
 
-    -- For setting up CUDA-needed gcc versions 
+    -- For setting up CUDA-compiler-needed gcc versions
+    -- you may only need one or two of the following
 
 sudo update-alternatives --remove-all gcc
 
@@ -179,7 +188,7 @@ sudo apt-get install oracle-java7-set-default
 
 sudo update-alternatives --config gcc
 
-................  clone into repo (default branch is master) git checkout 2.4 .........
+........  clone into OpenCV repo (default branch is master) git checkout 2.4 .........
 
 git clone https://github.com/Itseez/opencv.git
 
@@ -191,16 +200,23 @@ cd build
 
 cmake-gui .
 
-    -- some cmake-gui hints, subject to change of course...
-    -- hint: check the boxes in top area to 'group entries' and 'show advanced'
-    -- don't use fast-math unless you probably don't need this guide & know better.
-    -- don't check 'download tbb' up top if you already have it, but make sure the path is true
+    -- some cmake-gui hints:
+    -- don't go all OCD trying to fill in everything before you hit 'configure' at least once.
+    -- initially, check the two boxes in top area to 'group entries' and 'show advanced'
+    -- MAKE: don't use fast-math unless you probably don't need this guide & know better.
+    -- don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
     -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
-    -- do check mark all of the SSE instruction sets (and AVX) if you have a modern CPU
-    -- after checking options you can press configure as many times as needed
+    -- MAKE: do check mark all of the SSE instruction sets (and AVX) if you have a modern non-ARM CPU
+    -- after checking options you can press configure as many times as needed.  Sometimes the script finds things.
     -- just because the red highlight goes away doesn't mean it is fixed - look at the paths
-    -- If Intel, you still can use Open CL - but you benefit from TBB & IPP more than AMD
+    -- If Intel, you still can use Open CL - but you benefit from an active TBB & IPP more than AMD
     -- QT can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
+    -- you can select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
+    -- /usr/local/cuda or /usr/local/cuda-5-5 is your friend. also /usr/lib/nvidia-updates
+    -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card
+    -- CUDA: UNcheck attach to target
+    -- for QT you want  --> $HOME/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
+    -- after a 'configure' or 3, under MAKE, select Debug or Release build type
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
 
@@ -212,7 +228,7 @@ sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 
 sudo ldconfig
 
----- assume that all worked  ----
+---- to verify that all worked, enter the python interpreter ----
 
 python
 
@@ -220,8 +236,8 @@ python
 
 >>> b = cv2.getBuildInformation().split('\n')
 
->>> for l in b:
+>>> for p in b:
 
->>>     print l
+>>>     print p
 
 --- (here you will get a whole bunch of info to verify the build.  ctrl-D to exit) ---
