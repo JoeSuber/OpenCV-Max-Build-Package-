@@ -1,5 +1,5 @@
-OpenCV-Max-Build-Package-
-=========================
+###  OpenCV-Max-Build-Package-  ###
+###  =========================  ###
 
     -- when coming from a fresh install, packages for setting up a fat full-featured build
     
@@ -33,12 +33,6 @@ sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke
 
 sudo apt-get -y install git cmake cmake-gui
 
-#####  WARNING  ###########################
-
-## sudo apt-get -y install libopencv-dev ##
-
-.... Above is older version. Changes nvidia driver. .probably should reboot here .....
-
 sudo apt-get upgrade
 
 sudo apt-get -y remove ffmpeg x264 libx264-dev
@@ -63,22 +57,25 @@ sudo apt-get -y install libgtk2.0-dev libwebp4 libwebp-dev webp
 
 sudo apt-get -y install libfaac-dev libmp3lame-dev libtheora-dev libvorbis-dev
 
-sudo apt-get -y install libxine-dev libxine2-dev libxvidcore-dev libv4l-dev
-
 sudo apt-get -y install x264 v4l-utils ffmpeg
 
 sudo apt-get -y install libgstreamer*
 
-sudo apt-get install freeglut3 freeglut3-dev build-essential \
+sudo apt-get -y install freeglut3 freeglut3-dev build-essential \
     libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx \
     libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4 \
     linux-headers-generic linux-source
 
-sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
+sudo apt-get -y install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
+
+sudo apt-get -y install libxine-dev libxine2-dev libxvidcore-dev libv4l-dev
 
 ----- the above libxcb stuff  somehow is not fully covered by anything else. ----------
 
-......... VIDEO DRIVERS ...........  CAREFUL    ......  DANGER  ...................................
+#####  WARNING  ###########################
+sudo apt-get -y install libopencv-dev
+
+.... Above is older version. Changes nvidia driver. .probably should reboot here .....
 
 --- If playing with video drivers, be ready to loose everything on the partition ---
     
