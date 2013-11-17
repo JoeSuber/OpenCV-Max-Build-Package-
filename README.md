@@ -1,21 +1,21 @@
 ###  OpenCV-Max-Build-Package-  ###
-###  =========================  ###
 
     -- Benefit from having this in one place.  Also the ordering is useful, if not perfect.
     -- Helps a new installer avoid some pitfalls or at least know where the tarpits are located.
     
-IPP (Intel Integrated Performance Primitives) library is not on here due to a lack of package-managed install. You have to get a (free-of-charge) license code from Intel. link below
+IPP (Intel Integrated Performance Primitives) library is not on here due to a lack of package-managed install. You have to get a (free-of-charge) license code from Intel. link:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
-TBB (Intel Threaded Building Blocks) is very much worth it - (and it is open-source now) - use it!  
-But with IPP - I don't see a lot of improvements. Its benefit will depend on what your applications are and what other libraries are providing basic functions like resizing a picture or computing the FFT.
+TBB (Intel Threaded Building Blocks) is very much a must-have - (and it is open-source now) - use it!  
+But with IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are and what other libraries are providing basic functions like resizing a picture or computing the FFT.
 
 New Open CL stuff may be as good... still need to test that idea. If using IPP, use 7.1 version with static add-ons.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
     todo: try to understand all the pros & cons of cmake-gui options
     todo: test with openNI - I don't have a device
+    todo: Gige-whatever-cam, Ximea, Plantuml
 
 The Following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
@@ -191,15 +191,17 @@ sudo apt-get install oracle-java7-set-default
     --BTW this site is useful for many things distro related:
     http://www.webupd8.org/
 
-................. must switch to gcc-4.4 for compile of cuda-stuff ..................
+................. must switch to gcc-4.4 for compile of cuda-stuff (Ubuntu 13.10) .....
 
 sudo update-alternatives --config gcc
 
-........  clone into OpenCV repo (default branch is master) git checkout 2.4 .........
+........  clone into OpenCV repo (default branch is master) .........
 
 git clone https://github.com/Itseez/opencv.git
 
 cd opencv
+
+#recommended option# =  git checkout 2.4 
 
 mkdir build
 
