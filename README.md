@@ -3,13 +3,12 @@
 
     -- when coming from a fresh install, packages for setting up a fat full-featured build
     
-IPP is not on here due to a lack of package-managed install and new Open CL stuff may 
-be as good... still need to test that idea. If using IPP, use 7.1 version with static add-on.
-8.0 leaves out certain depreciated parts that OpenCV still needs.
+IPP is not on here due to a lack of package-managed install. New Open CL stuff may 
+be as good... still need to test that idea. If using IPP, use 7.1 version with static add-ons.
+8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
-todo: describe the pros & cons of cmake-gui options
-
-todo: test with openNI - I don't have a device
+    todo: describe all the pros & cons of cmake-gui options
+    todo: test with openNI - I don't have a device
 
 The Following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
@@ -39,13 +38,11 @@ sudo apt-get -y remove ffmpeg x264 libx264-dev
 
 sudo apt-get -y install build-essential checkinstall pkg-config yasm
 
-sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev
+sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev libeigen3-dev
 
 sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev
 
 sudo apt-get -y install doxygen
-
-sudo apt-get -y install libeigen3-dev
 
 sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev libopenexr6 libopenexr6-dev exrtools
 
@@ -57,7 +54,7 @@ sudo apt-get -y install libgtk2.0-dev libwebp4 libwebp-dev webp
 
 sudo apt-get -y install libfaac-dev libmp3lame-dev libtheora-dev libvorbis-dev
 
-sudo apt-get -y install x264 v4l-utils ffmpeg
+sudo apt-get -y install x264 libxvidcore-dev libv4l-dev v4l-utils ffmpeg
 
 sudo apt-get -y install libgstreamer*
 
@@ -68,7 +65,9 @@ sudo apt-get -y install freeglut3 freeglut3-dev build-essential \
 
 sudo apt-get -y install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
-sudo apt-get -y install libxine-dev libxine2-dev libxvidcore-dev libv4l-dev
+sudo apt-get -y install libxine-dev
+
+sudo apt-get -y install libxine2-dev 
 
 ----- the above libxcb stuff  somehow is not fully covered by anything else. ----------
 
