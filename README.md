@@ -53,7 +53,7 @@ sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-
 
 sudo apt-get -y install doxygen
 
-sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev libopenexr6 libopenexr6-dev exrtools
+sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev openexr exrtools libilmbase libopenexr-dev
 
 sudo apt-get -y install libbz2-dev libcoin80
 
@@ -220,31 +220,36 @@ cmake-gui .
 
     -- some cmake-gui hints:
     -- don't go all OCD trying to fill in everything before you hit 'configure' at least once.
-    -- initially, check the two boxes in top area to 'group entries' and 'show advanced'
+    -- initially, check the two boxes in top area to 'group entries' and 'show advanced'  That wil organize them a bit.
     -- MAKE: don't use fast-math for GCC or CUDA unless you probably don't need this guide & know better. eg:
     -- http://stackoverflow.com/questions/11507440/does-use-fast-math-option-translate-sp-multiplications-to-intrinsics
     -- don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
     -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
     -- MAKE: do check mark all of the SSE instruction sets (and AVX) if you have a modern non-ARM CPU
     -- after checking options you can press configure as many times as needed.  Sometimes the script finds things.
-    -- just because the red highlight goes away doesn't mean it is fixed - look at the paths
-    -- If Intel, you still can use Open CL - but you benefit from an active TBB & IPP more than AMD
-    -- QT can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
+    -- Just because the red highlight goes away doesn't mean it is fixed - look to see if the paths are filled.
+    -- If Intel, you still can use Open CL - but you benefit MORE from an active TBB & IPP than AMD users.
+    -- QT info can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
+    -- X11 options will always have a few missing, but you can ignore that to no ill effect. Trying to hunt down
+        all those will probably mess up dependency conflicts.
     -- you can select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
-    -- /usr/local/cuda or /usr/local/cuda-5-5 is your friend. also /usr/lib/nvidia-updates
+    -- when looking for 'missing' libraries, dirs under: /usr/local/cuda or /usr/local/cuda-5-5 are your friend. 
+    -- also look in /usr/lib/nvidia-updates for those pesky missing *.so
     -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card
     -- CUDA: UNcheck attach to target
-    -- the qmake executable = ~/qt5/qtbase/bin/qmake
-    -- for QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
-    -- after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit 'generate'
-    -- OPENGL_xmesa_INCLUDE = /usr/lib/x86_64-linux-gnu/mesa
-    -- the many cuda addresses may not show up right away. if you get the script started sometimes it finds the rest.
-    -- Here are a few to get YOU started. I think all the others are along these paths:
+    -- QT:the qmake executable = ~/qt5/qtbase/bin/qmake
+    -- QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
+    -- CMAKE after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit that final 'generate'
+    -- OPENGL_xmesa_INCLUDE = /usr/lib/x86_64-linux-gnu/mesa  For some reason it has trouble finding that one.
+    -- CUDA the many cuda addresses may not show up right away. if you get the script started then 'configure' 
+        sometimes it finds the rest.
+    -- Here are a few typical CUDA paths to get YOU started. I think all the others are along these paths:
         CUDA_CUDART_LIBRARY --> /usr/local/cuda-5.5/lib64/libcudart.so
         CUDA_NVCC_EXECUTABLE --> /usr/local/cuda-5.5/bin/nvcc
         CUDA_nvcuvid_LIBRARY --> /usr/lib/nvidia-331/libnvcuvid.so
         CUDA_cupti_LIBRARY --> /usr/local/cuda-5.5/extras/CUPTI/lib64/libcupti.so
         CUDA_CUDA_LIBRARY --> /usr/lib/nvidia-331/libcuda.so
+    -- Of course, you can't just cut n' paste the above - drivers & versions will change
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
 
