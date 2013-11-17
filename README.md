@@ -80,17 +80,15 @@ sudo apt-get -y install libxine2-dev
 
 ----- the above libxcb stuff  somehow is not fully covered by anything else. ----------
 
---- If playing with video drivers, be ready to loose everything on the partition ---
-
---- Some Concepts: GRUB - fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7 - service lightdm stop
-    
+    --- If playing with video drivers, be ready to loose everything on the partition ---
+    --- Some Concepts: GRUB - fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7 - service lightdm stop
     -- it is nice to have a way to 'put it back like it was.' consider this:
     http://www.fsarchiver.org/QuickStart
 
 #####  WARNING  ########  VIDEO DRIVER ZONE ###################
 sudo apt-get -y install libopencv-dev
 
-.... Above is older version. Changes video driver. Probably should reboot here .....
+    .... Above is older version. Changes video driver. Probably should reboot here .....
 
 --- At least have another way to get on-line and look stuff up ---
 
@@ -107,6 +105,10 @@ add a .deb install ppa from the official CUDA page:
     select this -> cuda-repo-ubuntu1210   or  the 1204 version... CUDA 6 is coming
 
 then use package-manager, like synaptic (sudo apt-get install synaptic) or aptitude, to run the update.
+
+    --when using Synaptic et. al. select Meta-Packages, not individual components
+    --trouble? make sure the ppa is added & you have hit update since ppa was added & that the new address was contacted by the update
+    
 ###### OR ######
 If looking for an education, a Bachelor of Arts in video driver installation:
 
@@ -146,6 +148,8 @@ sudo update-alternatives --config gcc       #choose 4.7.x or 4.8 for now
     -- below link-up may be outdated... but maybe not
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/libglut.so
+
+####  QT5 Section  ####
 
     ---if in need of latest QT5 - yeah, it takes a while, but provides best GUI for OpenCV-----
 
