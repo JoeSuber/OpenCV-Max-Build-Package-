@@ -107,7 +107,7 @@ add a .deb install ppa from the official CUDA page:
     select this -> cuda-repo-ubuntu1210   or  the 1204 version... CUDA 6 is coming
 
 then use package-manager, like synaptic (sudo apt-get install synaptic) or aptitude, to run the update.
-## OR ##
+###### OR ######
 If looking for an education, a Bachelor of Arts in video driver installation:
 
     sudo apt-get install cuda-5.5 nvidia-current nvidia-current-dev \
@@ -118,7 +118,7 @@ after that madness:
     export PATH=/usr/local/cuda-5.5/bin:$PATH
     export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
     
-######  NVIDIA STUFF + Silly Salamander = DANGEROUS  ##########
+####  NVIDIA STUFF + Silly Salamander = DANGEROUS  ########
 
 sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
 
@@ -201,7 +201,7 @@ git clone https://github.com/Itseez/opencv.git
 
 cd opencv
 
-#recommended option# =  git checkout 2.4 
+##### recommended option ##### =  git checkout 2.4 
 
 mkdir build
 
