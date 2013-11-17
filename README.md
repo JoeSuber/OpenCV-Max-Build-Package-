@@ -233,6 +233,7 @@ cmake-gui .
     -- the qmake executable = ~/qt5/qtbase/bin/qmake
     -- for QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
     -- after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit 'generate'
+    -- OPENGL_xmesa_INCLUDE = /usr/lib/x86_64-linux-gnu/mesa
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
 
