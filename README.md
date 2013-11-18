@@ -1,7 +1,14 @@
 ###  OpenCV-Max-Build-Package-  ###
 
-    -- Benefit from having this in one place.  Also the ordering is useful, if not perfect.
-    -- Helps a new installer avoid some pitfalls or at least know where the tarpits are located.
+When I started using OpenCV & Python I looked all over & never found this info in one spot.
+I was a Windows user. I had no idea how the linux world worked. I still have so much to learn. 
+I went from driving a mini-van while wearing a motorcycle helmet - backwards - 
+to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.  
+Think of this as some gasoline. Or a road atlas. You know what a road atlas is, right?.
+Trial, error - my wrong turns can be your paths-not-taken:
+
+    -- Also the ordering is useful, though probably not perfect.
+    -- Helps a new installer avoid some pitfalls.
     
 IPP (Intel Integrated Performance Primitives) library is not on here due to a lack of package-managed install. You have to get a (free-of-charge) license code from Intel. link:
 
@@ -13,11 +20,11 @@ But with IPP - I don't see a ton of improvements. Its benefit will depend on wha
 New Open CL stuff may be as good... still need to test that idea. If using IPP, use 7.1 version with static add-ons.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
-    todo: try to understand all the pros & cons of cmake-gui options
+    todo: try to illuminate all the pros & cons of cmake-gui options
     todo: test with openNI - I don't have a device
-    todo: Gige-whatever-cam, Ximea, Plantuml
+    todo: Unicap - mostly a Mac thing, I gather, Ximea, Plantuml
 
-The Following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
+The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
 --- I would do these 1 or 2 at a time to witness results ----
 
@@ -204,13 +211,20 @@ sudo update-alternatives --config gcc
 
 git clone https://github.com/Itseez/opencv.git
 
+    -- Git Noob? Do this from your 'home-dir'. '/home/your_user_name' = '~' = what I call 'home-dir'
+    -- Git makes /opencv and puts all the stuff there.  Now back out (type 'cd ..') and:
+
 git clone https://github.com/Itseez/opencv_extra.git
 
-    -- include the optional 'extras' in cmake-gui under OPENCV --> ~/opencv_extra
+    -- The above are NOT the 'extra modules'  Quite an unfortunate name. Intended 'extras' are next:
+
+git clone https://github.com/Itseez/opencv_contrib
+
+    -- include the optional 'extras' in cmake-gui under OPENCV_EXTRA_MODULES_PATH --> ~/opencv_contrib/modules
 
 cd opencv
 
-##### recommended option ##### =  git checkout 2.4 
+##### recommended option =  git checkout 2.4 
 
 mkdir build
 
