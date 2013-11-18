@@ -116,8 +116,8 @@ Very condensed NVIDIA driver / CUDA-5.5 install instructions:
     sudo add-apt-repository ppa:xorg-edgers/ppa 
     sudo apt-get update
     sudo apt-get install <package name>
-    -- Nov 18 2013 that meant:
-    sudo apt-get install nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
+    -- Nov 18 2013 that meant:  nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
+    -- but really. Just use the package manager to get current now before going on to CUDA
     
 add a .deb install ppa from the official CUDA page:
 
@@ -190,6 +190,7 @@ perl init-repository --no-webkit
 make -j4
 
     -- QT5 notes:
+    -- '-j4' means 'use 4 cpu cores'  Adjust yours accordingly.
     -- no 'make install' required as we used developer-build options
     -- also note lack of sudo or non-home activity
     -- want updates?  - may have to run ./configure again
