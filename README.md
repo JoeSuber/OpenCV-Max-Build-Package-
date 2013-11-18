@@ -10,22 +10,26 @@ Trial, error - my wrong turns can be your paths-not-taken:
     -- Also the ordering is useful, though probably not perfect.
     -- Helps a new installer avoid some pitfalls.
     
-IPP (Intel Integrated Performance Primitives) library is not on here due to a lack of package-managed install. You have to get a (free-of-charge) license code from Intel. link:
+IPP (Intel Integrated Performance Primitives) library is not on here due to a lack of package-managed install.
+You have to get a (free-of-charge) license code from Intel:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
-TBB (Intel Threaded Building Blocks) is very much a must-have - (and it is open-source now) - use it!  
-But with IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are and what other libraries are providing basic functions like resizing a picture or computing the FFT.
+TBB (Intel Threaded Building Blocks) though, is very much a must-have - (and it is open-source now) - use it!  
+But with IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are 
+and what other libraries are providing basic functions like resizing a picture or computing the FFT.
 
 New Open CL stuff may be as good... still need to test that idea. If using IPP, use 7.1 version with static add-ons.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
     todo: try to illuminate all the pros & cons of cmake-gui options
-    todo: test with openNI - I don't have a device
+    todo: test with openNI - I don't have an openNI device
     todo: Unicap - mostly a Mac thing, I gather, Ximea, Plantuml
+    todo: PvAPI, Matlab - a proprietary industrial camera, a proprietary math modeling thing.
 
 The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
+--- modern Debian-based installs should work very similarly   -----
 --- I would do these 1 or 2 at a time to witness results ----
 
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libclp-dev libcoinutils0 libcgl0 libvol0
@@ -37,6 +41,8 @@ sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke
 sudo apt-get -y install python-dev python-pip python-numpy
 
 sudo pip install gmpy
+
+    -- gmpy is not strictly needed for opencv but I use it for fast popcount in python 
 
 sudo apt-get -y install git cmake cmake-gui
 
@@ -232,26 +238,28 @@ cd build
 
 cmake-gui .
 
-    -- some cmake-gui hints:
-    -- don't go all OCD trying to fill in everything before you hit 'configure' at least once.
-    -- initially, check the two boxes in top area to 'group entries' and 'show advanced'  That wil organize them a bit.
+    -- Some cmake-gui opencv build hints:
+    -- master vs 2.4 - some of the following only apply to 'master' builds (~/opencv$ git checkout master)
+    -- Don't go all OCD trying to fill in everything before you hit 'configure' at least once.
+    -- Initially, check the two boxes in top area to 'group entries' and 'show advanced'  That wil organize them a bit.
     -- MAKE: don't use fast-math for GCC or CUDA unless you probably don't need this guide & know better. eg:
     -- http://stackoverflow.com/questions/11507440/does-use-fast-math-option-translate-sp-multiplications-to-intrinsics
-    -- don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
+    -- Don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
     -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
+    -- JASPER: never auto-fills the debug lib-path. Just copy in the release path.
     -- MAKE: do check mark all of the SSE instruction sets (and AVX) if you have a modern non-ARM CPU
-    -- after checking options you can press configure as many times as needed.  Sometimes the script finds things.
-    -- Just because the red highlight goes away doesn't mean it is fixed - look to see if the paths are filled.
+    -- After checking options you can press configure as many times as needed.  Sometimes the script finds things.
+    -- CMAKE-gui: Just because the red highlight goes away doesn't mean 'solved.' Look to see if the paths are filled.
     -- If Intel, you still can use Open CL - but you benefit MORE from an active TBB & IPP than AMD users.
     -- QT info can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
     -- X11 options will always have a few missing, but you can ignore that to no ill effect. Trying to hunt down
-        all those will probably mess up dependency conflicts.
-    -- you can select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
-    -- when looking for 'missing' libraries, dirs under: /usr/local/cuda or /usr/local/cuda-5-5 are your friend. 
+        all those will probably mess up a chain of dependencies specific to your setup.
+    -- You may select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
+    -- CUDA: When looking for 'missing' libraries, dirs under: /usr/local/cuda or /usr/local/cuda-5-5 are your friend. 
     -- also look in /usr/lib/nvidia-updates for those pesky missing *.so
-    -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card
+    -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card.
     -- CUDA: UNcheck attach to target
-    -- QT:the qmake executable = ~/qt5/qtbase/bin/qmake
+    -- QT5:the qmake executable = ~/qt5/qtbase/bin/qmake
     -- QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
     -- CMAKE after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit that final 'generate'
     -- OPENGL_xmesa_INCLUDE = /usr/lib/x86_64-linux-gnu/mesa  For some reason it has trouble finding that one.
