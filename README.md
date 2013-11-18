@@ -32,7 +32,8 @@ The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with mo
 --- modern Debian-based installs should work very similarly   -----
 --- I would do these 1 or 2 at a time to witness results ----
 
-sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libclp-dev libcoinutils0 libcgl0 libvol0
+sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libcoin80-dev libclp-dev \
+   libcoinutils0 libcgl0 libvol0
 
 sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libatlas-base-dev libeigen3-dev
 
