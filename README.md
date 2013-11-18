@@ -1,27 +1,28 @@
 ###  OpenCV-Max-Build-Package-  ###
 
-When I started using OpenCV & Python I looked all over & never found this info in one spot.
-I was a Windows user. I had no idea how the linux world worked. I still have so much to learn. 
-I went from driving a mini-van while wearing a motorcycle helmet - backwards - 
-to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.  
-Think of this as some gasoline. Or a road atlas. Trial, error - my wrong turns can be your paths-not-taken:
+This isn't a build script, though it could become that. There is, I think, much need for user intervention and 
+important choices to be made once you find out what works in your "Maximum Build."
 
-    -- Also the ordering is useful, though probably not perfect.
-    -- Helps a new installer avoid some pitfalls.
+    -- The ordering is useful, though probably not perfect.
+    -- Helps a new installer avoid some pitfalls, an old installer try some new tricks.
+    -- Helps me to not forget small - but crucial - things - (as often).
     
-IPP (Intel Integrated Performance Primitives) library is not on here due to a lack of package-managed install.
+IPP (Intel Integrated Performance Primitives) library is not on the list due to a lack of package-managed install.
 You have to get a (free-of-charge) license code from Intel:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
-TBB (Intel Threaded Building Blocks) though, is very much a must-have - (and it is open-source now) - use it!  
 But with IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are 
 and what other libraries are providing basic functions like resizing a picture or computing the FFT.
 
-New Open CL stuff may be as good... still need to test that idea. If using IPP, use 7.1 version with static add-ons.
+New Open CL stuff may be as good or better for many things... still need to test that idea. 
+If using IPP, use 7.1 version with static add-ons.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
-    todo: try to illuminate all the pros & cons of cmake-gui options
+TBB (Intel Threaded Building Blocks) though, is very much a must-have for your Intel CPU - 
+(and it is open-source now) - use it!   (package is in the list below) 
+
+    todo: figure-out and explain all the pros & cons of cmake-gui options
     todo: test with openNI - I don't have an openNI device
     todo: Unicap - mostly a Mac thing, I gather, Ximea, Plantuml
     todo: PvAPI, Matlab - a proprietary industrial camera, a proprietary math modeling thing.
@@ -29,12 +30,15 @@ New Open CL stuff may be as good... still need to test that idea. If using IPP, 
 The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
 --- modern Debian-based installs should work very similarly   -----
---- I would do these 1 or 2 at a time to witness results ----
+--- I would do these lines 1 or 2 at a time to witness results ----
 
-sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libcoin80-dev libclp-dev \
-   libcoinutils0 libcgl0 libvol0
+sudo apt-get upgrade
 
-sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libatlas-base-dev libeigen3-dev
+sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libcoin80-dev libclp-dev libcoin80
+
+sudo apt-get -y install libcoinutils0 libcgl0 libvol0 build-essential gcc g++ linux-headers-generic linux-source
+
+sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libgmp-dev libatlas-base-dev libeigen3-dev
 
 sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
@@ -54,11 +58,9 @@ sudo apt-get -y install git cmake cmake-gui
         -- Then, test, assuming nose is installed (sudo pip install nose):
     -- python -c 'import numpy; numpy.test()'
 
-sudo apt-get upgrade
-
 sudo apt-get -y remove ffmpeg x264 libx264-dev
 
-sudo apt-get -y install build-essential checkinstall pkg-config yasm
+sudo apt-get -y install checkinstall pkg-config yasm
 
 sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev 
 
@@ -66,9 +68,9 @@ sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-
 
 sudo apt-get -y install doxygen
 
-sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev openexr exrtools libilmbase libopenexr-dev
+sudo apt-get -y install libjasper-runtime libjasper1 libilmbase libilmbase-dev openexr exrtools libopenexr-dev
 
-sudo apt-get -y install libbz2-dev libcoin80
+sudo apt-get -y install libbz2-dev
 
 sudo apt-get -y install libtbb-dev liborc-dev
 
@@ -85,7 +87,9 @@ sudo apt-get -y install freeglut3 freeglut3-dev build-essential \
 
 sudo apt-get -y install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
-sudo apt-get -y install libgstreamer*
+sudo apt-get -y install libgstreamer* 
+
+sudo apt-get -y install gstreamer*
 
 sudo apt-get -y install libxine-dev
 
@@ -246,26 +250,27 @@ cmake-gui .
     -- http://stackoverflow.com/questions/11507440/does-use-fast-math-option-translate-sp-multiplications-to-intrinsics
     -- Don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
     -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
-    -- JASPER: never auto-fills the debug lib-path. Just copy in the release path.
+    -- JASPER: cmake never auto-fills the debug lib-path. Just copy the release path to DEBUG slot.
     -- MAKE: do check mark all of the SSE instruction sets (and AVX) if you have a modern non-ARM CPU
     -- After checking options you can press configure as many times as needed.  Sometimes the script finds things.
     -- CMAKE-gui: Just because the red highlight goes away doesn't mean 'solved.' Look to see if the paths are filled.
     -- If Intel, you still can use Open CL - but you benefit MORE from an active TBB & IPP than AMD users.
     -- QT info can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
     -- X11 options will always have a few missing, but you can ignore that to no ill effect. Trying to hunt down
-        all those will probably mess up a chain of dependencies specific to your setup.
+        those 'X' items will probably mess up a chain of dependencies specific to your setup.
     -- OPENEXR - As long as you see a version number (currently 1.71 from packages) for it under MEDIA I/O you are good.
     -- You may select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
     -- CUDA: When looking for 'missing' libraries, dirs under: /usr/local/cuda or /usr/local/cuda-5-5 are your friend. 
-    -- also look in /usr/lib/nvidia-updates for those pesky missing *.so
+    -- also look in /usr/lib/nvidia-updates for those pesky missing *.so libs
     -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card.
     -- CUDA: UNcheck attach to target
     -- QT5:the qmake executable = ~/qt5/qtbase/bin/qmake
     -- QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
     -- CMAKE after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit that final 'generate'
     -- OPENGL_xmesa_INCLUDE = /usr/lib/x86_64-linux-gnu/mesa  For some reason it has trouble finding that one.
-    -- CUDA the many cuda addresses may not show up right away. if you get the script started then 'configure' 
-        sometimes it finds the rest.
+    -- CUDA the many cuda addresses may not show up right away. if you get the script started with nvcc, 
+        then 'configure' sometimes it finds the rest.
+    -- Clp - libcoin - I've never been sure this is active. There are conflicting messages. Its a minor thing.
     -- Here are a few typical CUDA paths to get YOU started. I think all the others are along these paths:
         CUDA_CUDART_LIBRARY --> /usr/local/cuda-5.5/lib64/libcudart.so
         CUDA_NVCC_EXECUTABLE --> /usr/local/cuda-5.5/bin/nvcc
@@ -297,3 +302,12 @@ python
 >>>     print p
 
 --- (here you will get a whole bunch of info to verify the build.  ctrl-D to exit) ---
+
+When I started using OpenCV & Python I looked all over & never found this info in one spot.
+I was a Windows user. I had no idea how the linux world worked. I still have so much to learn. 
+I went from driving a mini-van while wearing a motorcycle helmet - backwards - 
+to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.  
+Think of this as some gasoline. Or a road atlas. For your openCV adventure...
+Trial, error - my wrong turns can be your paths-not-taken.
+
+If you spot an error, give me a shout!
