@@ -82,8 +82,7 @@ sudo apt-get -y install x264 libxvidcore-dev libv4l-dev v4l-utils ffmpeg
 
 sudo apt-get -y install freeglut3 freeglut3-dev build-essential \
     libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx \
-    libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4 \
-    linux-headers-generic linux-source
+    libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4
 
 sudo apt-get -y install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
@@ -114,7 +113,11 @@ That being said, the following seems to be working well now circa Nov 17, 2013..
 Very condensed NVIDIA driver / CUDA-5.5 install instructions:
 
     Drivers. How about some fresh crack?
-    nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
+    sudo add-apt-repository ppa:xorg-edgers/ppa 
+    sudo apt-get update
+    sudo apt-get install <package name>
+    -- Nov 18 2013 that meant:
+    sudo apt-get install nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
     
 add a .deb install ppa from the official CUDA page:
 
