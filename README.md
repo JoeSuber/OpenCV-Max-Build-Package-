@@ -254,6 +254,7 @@ cmake-gui .
     -- QT info can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
     -- X11 options will always have a few missing, but you can ignore that to no ill effect. Trying to hunt down
         all those will probably mess up a chain of dependencies specific to your setup.
+    -- OPENEXR - As long as you see a version number (currently 1.71 from packages) for it under MEDIA I/O you are good.
     -- You may select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
     -- CUDA: When looking for 'missing' libraries, dirs under: /usr/local/cuda or /usr/local/cuda-5-5 are your friend. 
     -- also look in /usr/lib/nvidia-updates for those pesky missing *.so
