@@ -4,8 +4,7 @@ When I started using OpenCV & Python I looked all over & never found this info i
 I was a Windows user. I had no idea how the linux world worked. I still have so much to learn. 
 I went from driving a mini-van while wearing a motorcycle helmet - backwards - 
 to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.  
-Think of this as some gasoline. Or a road atlas. You know what a road atlas is, right?.
-Trial, error - my wrong turns can be your paths-not-taken:
+Think of this as some gasoline. Or a road atlas. Trial, error - my wrong turns can be your paths-not-taken:
 
     -- Also the ordering is useful, though probably not perfect.
     -- Helps a new installer avoid some pitfalls.
