@@ -36,7 +36,7 @@ sudo apt-get upgrade
 
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libcoin80-dev libcoin80
 
-sudo apt-get -y install libcoinutils0 libcgl0 libvol0 build-essential gcc g++ linux-headers-generic linux-source
+sudo apt-get -y install libcoinutils0 build-essential gcc g++ linux-headers-generic linux-source
 
 sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libgmp-dev libatlas-base-dev libeigen3-dev
 
