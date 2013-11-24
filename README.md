@@ -81,9 +81,7 @@ sudo apt-get -y install libfaac-dev libmp3lame-dev libtheora-dev libvorbis-dev
 
 sudo apt-get -y install x264 libxvidcore-dev libv4l-dev v4l-utils ffmpeg
 
-sudo apt-get -y install freeglut3 freeglut3-dev build-essential \
-    libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx \
-    libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4
+sudo apt-get -y install freeglut3 freeglut3-dev build-essential \libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx \libglu1-mesa libglu1-mesa-dev gcc g++ gcc-4.4 g++-4.4
 
 sudo apt-get -y install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
