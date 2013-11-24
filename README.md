@@ -42,11 +42,12 @@ sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libgmp-de
 
 sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
-sudo apt-get -y install python-dev python-pip python-numpy
+sudo apt-get -y install python-dev python-pip python-numpy python-gevent
 
-sudo pip install gmpy
+sudo pip install gmpy grequests requests
 
-    -- gmpy is not strictly needed for opencv but I use it for fast popcount in python 
+    -- gmpy is not strictly needed for opencv but I use it for fast popcount in python
+    -- gevent and grequests are optional as well, just here for convenience
 
 sudo apt-get -y install git cmake cmake-gui
 
@@ -68,7 +69,7 @@ sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-
 
 sudo apt-get -y install doxygen
 
-sudo apt-get -y install libjasper-runtime libjasper1 libilmbase libilmbase-dev openexr exrtools libopenexr-dev
+sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev openexr exrtools libopenexr-dev
 
 sudo apt-get -y install libbz2-dev
 
