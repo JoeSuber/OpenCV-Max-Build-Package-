@@ -69,6 +69,8 @@ sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-
 
 sudo apt-get -y install doxygen
 
+sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
+
 sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev openexr exrtools libopenexr-dev
 
 sudo apt-get -y install libbz2-dev
@@ -99,11 +101,10 @@ sudo apt-get -y install libxine2-dev
     --- Some Concepts: GRUB - fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7 - service lightdm stop
     -- it is nice to have a way to 'put it back like it was.' consider this:
     http://www.fsarchiver.org/QuickStart
+    or better yet (your own script / plan) to use 'rsync'
+
 
 #####  WARNING  ########  VIDEO DRIVER ZONE ###################
-sudo apt-get -y install libopencv-dev
-
-    .... Above is older version. Changes video driver. Probably should reboot here .....
 
 --- At least have another way to get on-line and look stuff up ---
 
@@ -139,14 +140,14 @@ after that madness:
     export PATH=/usr/local/cuda-5.5/bin:$PATH
     export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
     
-####  NVIDIA STUFF + Silly Salamander = DANGEROUS  ########
+####  NVIDIA STUFF + Silly Salamander or Reckless Racoon = DANGEROUS  ########
 (leaving danger zone)
-
-sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
 
     -- For setting up CUDA-compiler-needed gcc versions
     -- you may only need one or two of the following
-    -- 4.4 is needed for Ubuntu 13.10- other recommendations for cuda 5.5 are on:
+    -- 4.4 WAS needed for Ubuntu 13.04 
+    -- 4.8 has worked for 13.10 (and quite well)
+    other recommendations for cuda 5.5 are on:
     http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#linux-5-5
     
 sudo update-alternatives --remove-all gcc
