@@ -34,7 +34,7 @@ The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with mo
 
 sudo apt-get upgrade
 
-sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libcoin80-dev libclp-dev libcoin80
+sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libcoin80-dev libcoin80
 
 sudo apt-get -y install libcoinutils0 libcgl0 libvol0 build-essential gcc g++ linux-headers-generic linux-source
 
