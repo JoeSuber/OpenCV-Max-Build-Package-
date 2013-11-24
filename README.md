@@ -217,7 +217,7 @@ sudo apt-get install oracle-java7-set-default
     --BTW this site is useful for many things distro related:
     http://www.webupd8.org/
 
-................. must switch to gcc-4.4 for compile of cuda-stuff (Ubuntu 13.10) .....
+## perhaps not 11-22 ### -> switch to gcc-4.4 for compile of cuda-stuff (Ubuntu 13.10) .....
 
 sudo update-alternatives --config gcc
 
