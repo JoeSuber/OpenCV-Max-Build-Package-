@@ -285,7 +285,7 @@ cmake-gui .
 
 ---- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
 
-sudo make -j4
+make -j4
 
 sudo make install
 
