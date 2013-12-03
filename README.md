@@ -15,7 +15,11 @@ You have to get a (free-of-charge) license code from Intel:
 But with IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are 
 and what other libraries are providing basic functions like resizing a picture or computing the FFT.
 
-New Open CL stuff may be as good or better for many things... still need to test that idea. 
+New Open CL stuff may be as good or better for many things... still need to test that idea.
+
+    -- 12-2-13 I can confirm that several apps are running as well or better now 
+    -- with OpenCL sans IPP (master branch)
+    
 If using IPP, use 7.1 version with static add-ons.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
@@ -217,7 +221,12 @@ sudo apt-get install oracle-java7-set-default
     --BTW this site is useful for many things distro related:
     http://www.webupd8.org/
 
-## perhaps not 11-22 ### -> switch to gcc-4.4 for compile of cuda-stuff (Ubuntu 13.10) .....
+## I confirm that many successful builds now use only GCC 4.8 ##
+- Dec. 2, 2013
+- On this particular platform - other linux kernals, CUDA versions, maybe drivers
+- could influence the success of the compilations using gcc 4.8 instead of 4.4
+
+so maybe you can skip:
 
 sudo update-alternatives --config gcc
 
