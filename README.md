@@ -1,7 +1,7 @@
 ###  OpenCV-Max-Build-Package-  ###
 
 This isn't a build script, though it could become that. There is, I think, much need for user intervention and 
-important choices to be made once you find out what works in your "Maximum Build."
+important choices to be made as you find out what works for particular apps and hardware: your "Maximum Build."
 
     -- The ordering is useful, though probably not perfect.
     -- Helps a new installer avoid some pitfalls, an old installer try some new tricks.
@@ -12,8 +12,9 @@ You have to get a (free-of-charge) license code from Intel:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
-But with IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are 
+With IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are 
 and what other libraries are providing basic functions like resizing a picture or computing the FFT.
+IPP is only free-of-charge for non-commercial use.
 
 New Open CL stuff may be as good or better for many things... still need to test that idea.
 
