@@ -1,6 +1,10 @@
 ###  OpenCV-Max-Build-Package-  ###
 
-This isn't a build script, though it could become that. There is, I think, much need for user intervention and 
+    -- Jan 6 2014 note: After a Jan 2nd xorg-edgers update blew up my Dec. install I went through this guide
+    --- Everything worked! With the exception that you should avoid the ppa-based nvidia cuda and video 
+    --- drivers and simply install the 5.5.22 cuda version d/l from the nvidia website.
+
+This isn't a build script, though it has a lot of cut & paste. There is, I think, much need for user intervention and 
 important choices to be made as you find out what works for particular apps and hardware: your "Maximum Build."
 
     -- The ordering is useful, though probably not perfect.
