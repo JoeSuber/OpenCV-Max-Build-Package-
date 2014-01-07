@@ -122,16 +122,24 @@ sudo apt-get -y install libxine2-dev
 
 --- At least have another way to get on-line and look stuff up ---
 
-That being said, the following seems to be working well now circa Nov 17, 2013...
-
 Very condensed NVIDIA driver / CUDA-5.5 install instructions:
-
+    1-6-14 UPDATE - recent PPA version seems to be made for ubuntu 14.0x or I don't
+    understand what... It breaks X windows, I loose some GL stuff...
+    I think it is made for kernel 3.13.xx but salamander is on 3.11.  
+    Nvidia d/l drivers seem to be the only way to fix.  
+    Use ctrl-alt-f1 
+    - sudo service lightdm stop
+    run the downloaded Nvidia installer, NOT package managed version, ok ok ok 
+    - sudo service lightdm start 
+    - back in business.  Ignore Below until this trouble clears up.
+    
+    I would NOT install the PPA right now
+    
     Drivers. How about some fresh crack?
     sudo add-apt-repository ppa:xorg-edgers/ppa 
     sudo apt-get update
     sudo apt-get install <package name>
     -- Nov 18 2013 that meant:  nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
-    -- but really. Just use the package manager to get current now before going on to CUDA
     
 add a .deb install ppa from the official CUDA page:
 
@@ -143,40 +151,25 @@ then use package-manager, like synaptic (sudo apt-get install synaptic) or aptit
     --when using Synaptic et. al. select Meta-Packages, not individual components
     --trouble? make sure the ppa is added & you have hit update since ppa was added & that the new 
     address was contacted by the update
-###### OR ######
-If looking for an education, a Bachelor of Arts in video driver installation:
-
-    sudo apt-get install cuda-5.5 nvidia-current nvidia-current-dev \
-                  nvidia-modprobe nvidia-settings
-
-after that madness:
 
     export PATH=/usr/local/cuda-5.5/bin:$PATH
     export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
-    
+
 ####  NVIDIA STUFF + Silly Salamander or Reckless Racoon = DANGEROUS  ########
 (leaving danger zone)
-
-    -- For setting up CUDA-compiler-needed gcc versions
-    -- you may only need one or two of the following
-    -- 4.4 WAS needed for Ubuntu 13.04 
-    -- 4.8 has worked for 13.10 (and quite well)
-    other recommendations for cuda 5.5 are on:
-    http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#linux-5-5
+        
+    -- 4.4 WAS needed for Ubuntu 13.04
+    -- gcc 4.8 has worked for 13.10 (and quite well) obsoleting the below
+            other recommendations for cuda 5.5 are on:
+        http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#linux-5-5
     
 sudo update-alternatives --remove-all gcc
-
-sudo update-alternatives --config gcc
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 20
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 50
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 10
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40
 
 sudo update-alternatives --config gcc       #choose 4.7.x or 4.8 for now
 
