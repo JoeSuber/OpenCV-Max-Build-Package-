@@ -60,13 +60,18 @@ sudo pip install gmpy grequests requests
 
 sudo apt-get -y install git cmake cmake-gui
 
-    -- as of this note, gfortran is used to build atlas, hence, numpy so if building your own numpy:
-    -- git clone https://github.com/numpy/numpy.git
-    -- cd numpy
-    -- python setup.py build --fcompiler=gnu95
-    -- sudo python setup.py install
-        -- Then, test, assuming nose is installed (sudo pip install nose):
-    -- python -c 'import numpy; numpy.test()'
+    -- if building your own numpy, might as well get OpenBlas first:
+        - git clone git://github.com/xianyi/OpenBLAS
+    -- make, make install (takes a little while)
+        - git clone https://github.com/numpy/numpy.git
+        - cd numpy
+        - python setup.py build --fcompiler=gnu95
+        - sudo python setup.py install
+    -- Then, test, assuming nose is installed (sudo pip install nose):
+        - cd ..
+        - python -c 'import numpy; numpy.test()'
+    -- With a test-time of about 9.8 seconds, OpenBlas-backed Numpy was
+    -- about .5 sec faster than ATLAS-backed Numpy (ver 1.90-dev, on 4-core 3.4 ghz i5 4760)
 
 sudo apt-get -y remove ffmpeg x264 libx264-dev
 
