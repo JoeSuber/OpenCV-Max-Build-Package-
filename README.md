@@ -31,11 +31,6 @@ If using IPP, use 7.1 version with static add-ons.
 TBB (Intel Threaded Building Blocks) though, is very much a must-have for your Intel CPU - 
 (and it is open-source now) - use it!   (package is in the list below) 
 
-    todo: figure-out and explain all the pros & cons of cmake-gui options
-    todo: test with openNI - I don't have an openNI device
-    todo: Unicap - mostly a Mac thing, I gather, Ximea, Plantuml
-    todo: PvAPI, Matlab - a proprietary industrial camera, a proprietary math modeling thing.
-
 The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
 --- modern Debian-based installs should work very similarly   -----
@@ -122,7 +117,7 @@ sudo apt-get -y install libxine2-dev
 
 --- At least have another way to get on-line and look stuff up ---
 
-Very condensed NVIDIA driver / CUDA-5.5 install instructions:
+    Very condensed NVIDIA driver / CUDA-5.5 install instructions:
     1-6-14 UPDATE - recent PPA version seems to be made for ubuntu 14.0x or I don't
     understand what... It breaks X windows, I loose some GL stuff...
     I think it is made for kernel 3.13.xx but salamander is on 3.11.  
@@ -224,14 +219,9 @@ sudo apt-get install oracle-java7-set-default
     --BTW this site is useful for many things distro related:
     http://www.webupd8.org/
 
-## I confirm that many successful builds now use only GCC 4.8 ##
-- Dec. 2, 2013
-- On this particular platform - other linux kernals, CUDA versions, maybe drivers
-- could influence the success of the compilations using gcc 4.8 instead of 4.4
+(if you were using 4.4 to compile CUDA switch back to 4.8 now)
 
-so maybe you can skip:
-
-sudo update-alternatives --config gcc
+    -sudo update-alternatives --config gcc
 
 ........  clone into OpenCV repo (default branch is master) .........
 
