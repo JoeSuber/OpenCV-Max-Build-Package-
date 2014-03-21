@@ -13,8 +13,8 @@
     --- Everything worked! With the exception that you should avoid the ppa-based nvidia cuda and video 
     --- drivers and simply install the 5.5.22 cuda version d/l from the nvidia website.
 
-This isn't a build script, though it has a lot of cut & paste. There is, I think, much need for user intervention and 
-important choices to be made as you find out what works for particular apps and hardware: your "Maximum Build."
+This isn't a build script, but it has a lot of cut & paste. There is, I think, much need for user intervention and 
+important choices to be made as you adjust for particular apps and hardware: your "Maximum Build."
 
     -- The ordering is useful, though probably not perfect.
     -- Helps a new installer avoid some pitfalls, an old installer try some new tricks.
@@ -42,8 +42,8 @@ TBB (Intel Threaded Building Blocks) though, is very much a must-have for your I
 
 The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
 
---- modern Debian-based installs should work very similarly   -----
---- I would do these lines 1 or 2 at a time to witness results ----
+    --- modern Debian-based installs should work very similarly   -----
+    --- I would do these lines 1 or 2 at a time to witness results ----
 
 sudo apt-get upgrade
 
