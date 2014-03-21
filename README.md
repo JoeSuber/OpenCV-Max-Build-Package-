@@ -153,10 +153,11 @@ then use package-manager, like synaptic (sudo apt-get install synaptic) or aptit
 ####  NVIDIA STUFF + Silly Salamander or Reckless Racoon = DANGEROUS  ########
 (leaving danger zone)
         
-    -- 4.4 WAS needed for Ubuntu 13.04
-    -- gcc 4.8 has worked for 13.10 (and quite well) obsoleting the below
-            other recommendations for cuda 5.5 are on:
+    -- gcc 4.4 WAS needed for Ubuntu 13.04
+    -- gcc 4.8 has worked for 13.10 (and quite well) obsoleting the gcc-related items below:
+            other recommendations for compilation of cuda 5.5 on various OS are on:
         http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#linux-5-5
+            (though this is getting a little long-in-the-tooth)
     
 sudo update-alternatives --remove-all gcc
 
