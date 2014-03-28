@@ -1,6 +1,6 @@
 ###  OpenCV-Max-Build-Package-  ###
 
-    -- March 20, 2014: Must investigate the VTK extensions. Keep using Nvidia provided drivers & cuda direct d/l.
+    -- March 29, 2014: Keep using Nvidia provided drivers & cuda direct d/l.
         -- the only downside to that is that when your linux kernel is updated, after an eventual reboot, 
         -- when confronted by the dreaded 'X' cursor on a blank, black, low-res GUI you can't escape:
             Ctrl-Alt-f1, enter login, pass
