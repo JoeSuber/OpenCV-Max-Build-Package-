@@ -301,6 +301,8 @@ sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 
 sudo ldconfig
 
+sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
+
 ---- to verify that all worked, enter the python interpreter ----
 
     python
