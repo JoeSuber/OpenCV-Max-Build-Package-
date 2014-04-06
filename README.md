@@ -151,12 +151,14 @@ sudo apt-get -y install libxine2-dev
     sudo apt-get update
     sudo apt-get install <package name>
     -- Nov 18 2013 that meant:  nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
-    
+ 
+ FOR NOW, DO NOT USE:  
 add a .deb install ppa from the official CUDA page:
 
     https://developer.nvidia.com/cuda-downloads
     select this -> cuda-repo-ubuntu1210   or  the 1204 version... CUDA 6 is coming
 
+ FOR NOW, DO NOT USE:
 then use package-manager, like synaptic (sudo apt-get install synaptic) or aptitude, to run the update.
 
     --when using Synaptic et. al. select Meta-Packages, not individual components
@@ -183,13 +185,14 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 50
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60
 
-sudo update-alternatives --config gcc   #choose 4.7.x or 4.8 for CUDA 5.5 compilation
+sudo update-alternatives --config gcc   # choose 4.4, 4.7.x or 4.8 for CUDA 5.5 compilation
 
     -- below link-up may be outdated... but maybe not
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/libglut.so
 
 (some packages added on later)
+
 sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
 
 ####  QT5 Section  ####
@@ -256,6 +259,7 @@ git clone https://github.com/Itseez/opencv_contrib
 -- include the optional 'extras' in cmake-gui under OPENCV_EXTRA_MODULES_PATH --> ~/opencv_contrib/modules
 
 cd opencv
+
 recommended option = git checkout 2.4
 
 mkdir build
