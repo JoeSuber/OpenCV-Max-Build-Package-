@@ -25,15 +25,10 @@ You have to get a (free-of-charge) license code from Intel:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
-With IPP - I don't see a ton of improvements. Its benefit will depend on what your applications are 
-and what other libraries are providing basic functions like resizing a picture or computing the FFT.
+IPP used to be more crucial, but OpenCL is now picking up some of the parallelization chores.
+Its benefit will depend on what your applications are and what other libraries are providing 
+basic functions like resizing a picture or computing the FFT.
 IPP is only free-of-charge for non-commercial use.
-
-New Open CL stuff may be as good or better for many things... still need to test that idea.
-
-    -- 12-2-13 I can confirm that several apps are running as well or better now 
-    -- with OpenCL sans IPP (master branch)
-    
 If using IPP, use 7.1 version with static add-ons.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
@@ -55,7 +50,7 @@ sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libgmp-de
 
 sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
-sudo apt-get -y install python-dev python-pip python-numpy python-gevent
+sudo apt-get -y install python-dev python-pip python-numpy python-gevent python-levenshtein
 
 sudo pip install gmpy grequests requests
 
@@ -63,6 +58,7 @@ sudo pip install gmpy grequests requests
     -- gevent and grequests are optional as well, just here for convenience
 
 sudo apt-get -y install git cmake cmake-gui
+sudo apt-get -y install checkinstall pkg-config yasm
 
     -- if building your own numpy, might as well get OpenBlas first:
         - git clone git://github.com/xianyi/OpenBLAS
@@ -78,8 +74,6 @@ sudo apt-get -y install git cmake cmake-gui
     -- about .5 sec faster than ATLAS-backed Numpy (ver 1.90-dev, on 4-core 3.4 ghz i5 4760)
 
 sudo apt-get -y remove ffmpeg x264 libx264-dev
-
-sudo apt-get -y install checkinstall pkg-config yasm
 
 sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev 
 
@@ -139,7 +133,7 @@ sudo apt-get -y install libxine2-dev
     
     I would NOT install the PPA right now
     
-    Drivers. How about some fresh crack?
+    FOR NOW, DO NOT USE:
     sudo add-apt-repository ppa:xorg-edgers/ppa 
     sudo apt-get update
     sudo apt-get install <package name>
@@ -163,7 +157,7 @@ then use package-manager, like synaptic (sudo apt-get install synaptic) or aptit
 (leaving danger zone)
         
     -- gcc 4.4 WAS needed for Ubuntu 13.04
-    -- gcc 4.8 has worked for 13.10 (and quite well) obsoleting the gcc-related items below:
+    -- gcc 4.7.x has worked for 13.10:
             other recommendations for compilation of cuda 5.5 on various OS are on:
         http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#linux-5-5
             (though this is getting a little long-in-the-tooth)
@@ -176,11 +170,14 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 50
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60
 
-sudo update-alternatives --config gcc       #choose 4.7.x or 4.8 for now
+sudo update-alternatives --config gcc   #choose 4.7.x or 4.8 for CUDA 5.5 compilation
 
     -- below link-up may be outdated... but maybe not
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/libglut.so
+
+(some packages added on later)
+sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
 
 ####  QT5 Section  ####
 
@@ -301,8 +298,6 @@ sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 
 sudo ldconfig
 
-sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
-
 ---- to verify that all worked, enter the python interpreter ----
 
     python
@@ -320,5 +315,5 @@ sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
 When I started using OpenCV & Python I looked all over & never found this info in one spot. I was a Windows user. I had no idea how the linux world worked. I still have so much to learn. I went from driving a mini-van while wearing a motorcycle helmet - backwards - to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.
 Think of this as some gasoline. Or a road atlas. For your openCV adventure... Trial, error - my wrong turns can be your paths-not-taken.
 
-If you spot an error, give me a shout!
+If you spot any smokies, pick up the horn & give me a shout!
     
