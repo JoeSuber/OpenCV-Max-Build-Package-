@@ -60,7 +60,20 @@ sudo pip install gmpy grequests requests
 sudo apt-get -y install git cmake cmake-gui
 sudo apt-get -y install checkinstall pkg-config yasm
 
-    -- if building your own numpy, might as well get OpenBlas first:
+    -- ATLAS from distro works, but is generic. Build your own to ensure it is tuned to your CPU.
+        - http://sourceforge.net/projects/math-atlas/files/
+        my sample configure line: ~/ATLAS/configure -D c -DPentiumCPS=3401 -DATL_ARCH_Corei5 --shared
+        **************************************************
+        from README:
+        mkdir my_build_dir ; cd my_build_dir
+        /path/to/ATLAS/configure [flags]
+        make              ! tune and compile library (can take 30+ minutes)
+        make check        ! perform sanity tests
+        make ptcheck      ! checks of threaded code for multiprocessor systems
+        make time         ! provide performance summary as % of clock rate
+        make install      ! Copy library and include files to other directories
+        **************************************************
+    -- if not building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
     -- make, make install (takes a little while)
         - git clone https://github.com/numpy/numpy.git
@@ -71,7 +84,7 @@ sudo apt-get -y install checkinstall pkg-config yasm
         - cd ..
         - python -c 'import numpy; numpy.test()'
     -- With a test-time of about 9.8 seconds, OpenBlas-backed Numpy was
-    -- about .5 sec faster than ATLAS-backed Numpy (ver 1.90-dev, on 4-core 3.4 ghz i5 4760)
+    -- about .5 sec faster than ATLAS-backed Numpy (ver 1.90-dev, on 4-core 3.4 ghz i5 4670)
 
 sudo apt-get -y remove ffmpeg x264 libx264-dev
 
