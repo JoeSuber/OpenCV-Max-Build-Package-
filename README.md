@@ -75,7 +75,8 @@ sudo apt-get -y install checkinstall pkg-config yasm
         **************************************************
     -- if not building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
-    -- make, make install (takes a little while)
+        -- make, make install (takes a little while)
+    -- Numpy -newest sometimes has good improvements over distro version
         - git clone https://github.com/numpy/numpy.git
         - cd numpy
         - python setup.py build --fcompiler=gnu95
