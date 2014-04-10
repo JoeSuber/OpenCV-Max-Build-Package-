@@ -60,19 +60,22 @@ sudo pip install gmpy grequests requests
 sudo apt-get -y install git cmake cmake-gui
 sudo apt-get -y install checkinstall pkg-config yasm
 
-    -- ATLAS from distro works, but is generic. Build your own to ensure it is tuned to your CPU.
+     **************************************************
+    -- ATLAS from distro works, but is generic. Build your own from recent Source to 
+    ensure it is 'tuned' to your CPU.  First git clone or dl LAPACK, then
         - http://sourceforge.net/projects/math-atlas/files/
-        my sample configure line: ~/ATLAS/configure -D c -DPentiumCPS=3401 --shared
-        **************************************************
-        from README:
-        mkdir my_build_dir ; cd my_build_dir
-        /path/to/ATLAS/configure [flags]
-        make              ! tune and compile library (can take 30+ minutes)
-        make check        ! perform sanity tests
-        make ptcheck      ! checks of threaded code for multiprocessor systems
-        make time         ! provide performance summary as % of clock rate
-        make install      ! Copy library and include files to other directories
-        **************************************************
+    A sample ATLAS configure line (run from 'ATLAS/build/'): 
+        ../configure -D c -DPentiumCPS=3401 -Si archdef 0 --shared \
+	        --prefix=/home/suber/lib/atlas \
+	        --with-netlib-lapack-tarfile=/home/suber/Downloads/lapack-3.5.0.tgz
+        
+    make              ! tune and compile library (can take 30+ minutes)
+    make check        ! perform sanity tests
+    make ptcheck      ! checks of threaded code for multiprocessor systems
+    make time         ! provide performance summary as % of clock rate
+    (sudo) make install      ! Copy library and include files to other directories
+    **************************************************
+    
     -- if building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
         -- make, make install (takes a little while)
