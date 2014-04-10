@@ -62,11 +62,13 @@ sudo apt-get -y install checkinstall pkg-config yasm
 
      **************************************************
     -- ATLAS from distro works, but is generic. Build your own from recent Source to 
-    ensure it is 'tuned' to your CPU.  First git clone or dl LAPACK, then
-        - http://sourceforge.net/projects/math-atlas/files/
-    A sample ATLAS configure line (run from 'ATLAS/build/'): 
+    ensure it is 'tuned' to your CPU.  First download LAPACK-x.x.x.tgz, then
+    	- echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor >/dev/null
+        - get atlas: http://sourceforge.net/projects/math-atlas/files/
+        - decompress to ~/ATLAS
+        - mkdir ~/ATLAS/build
+    A sample ATLAS configure line (run from '~/ATLAS/build/'): 
         ../configure -D c -DPentiumCPS=3401 -Si archdef 0 --shared \
-	        --prefix=/home/suber/lib/atlas \
 	        --with-netlib-lapack-tarfile=/home/suber/Downloads/lapack-3.5.0.tgz
         
     make              ! tune and compile library (can take 30+ minutes)
