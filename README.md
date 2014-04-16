@@ -92,6 +92,13 @@ sudo apt-get -y install checkinstall pkg-config yasm
     -- With a test-time of about 9.8 seconds, OpenBlas-backed Numpy was
     -- about .5 sec faster than ATLAS-backed Numpy (ver 1.90-dev, on 4-core 3.4 ghz i5 4670)
 
+Here (finally) is the buildable source for "Clp" - Coin-or Linear Problem Solver:
+
+http://www.coin-or.org/download/source/Clp/Clp-1.15.6.tgz
+
+	-- Clp has very standard build from source dir: 
+	-- ./configure, make -j4, make check, make test, sudo make install
+
 sudo apt-get -y remove ffmpeg x264 libx264-dev
 
 sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev 
