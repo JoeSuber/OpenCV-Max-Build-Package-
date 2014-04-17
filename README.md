@@ -244,7 +244,7 @@ make -j4
     git submodule sync
     git submodule update --recursive
 
----------- how about some java 7? in a ppa! -----------------------------------------
+#### how about some java 7? in a ppa! ####
 
 sudo add-apt-repository ppa:webupd8team/java
 
@@ -298,7 +298,7 @@ cmake-gui .
     	'group entries' and 'show advanced'  That wil organize the hundreds of options a bit.
     -- MAKE: don't use fast-math for GCC or CUDA unless you probably don't need this guide & know better. eg:
     -- http://stackoverflow.com/questions/11507440/does-use-fast-math-option-translate-sp-multiplications-to-intrinsics
-    -- Don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
+    -- Don't check 'DOWNLOAD TBB' up top if you already have it, but make sure the path is true after a 'config'
     -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
     -- JASPER: cmake never auto-fills the debug lib-path. Just copy the release path to DEBUG slot.
     -- MAKE: do check mark all of the SSE instruction sets (and AVX) if you have a modern non-ARM CPU
