@@ -1,6 +1,6 @@
-###  OpenCV-Max-Build-Package-  ###
+###  OpenCV-Max-Build-Package CUDA 6.0 Ubuntu 13.10-  ###
 
-    -- March 29, 2014: Keep using Nvidia provided drivers & cuda direct d/l.
+    -- April 16, 2014: Keep using Nvidia provided proprietary drivers & cuda direct d/l.
         -- the only downside to that is that when your linux kernel is updated, after an eventual reboot, 
         -- when confronted by the dreaded 'X' cursor on a blank, black, low-res GUI you can't escape:
             Ctrl-Alt-f1, enter login, pass
@@ -42,13 +42,13 @@ The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with mo
 
 sudo apt-get upgrade
 
-sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards libcoin80-dev libcoin80
+sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 
-sudo apt-get -y install libcoinutils0 build-essential gcc g++ linux-headers-generic linux-source
+sudo apt-get -y install build-essential gcc g++ linux-headers-generic linux-source
 
-sudo apt-get -y install libtool graphviz default-mta gfortran libgmp10 libgmp-dev libatlas-base-dev libeigen3-dev
+sudo apt-get -y install libcoin80-dev libcoin80 libtool graphviz default-mta gfortran libgmp10 libgmp-dev libatlas-base-dev 
 
-sudo apt-get -y install libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
+sudo apt-get -y install libeigen3-dev libblas3 libblas-dev liblapack3 liblapack-dev liblapacke libmpfr4 libmpfr-dev
 
 sudo apt-get -y install python-dev python-pip python-numpy python-gevent python-levenshtein
 
@@ -60,28 +60,31 @@ sudo pip install gmpy grequests requests
 sudo apt-get -y install git cmake cmake-gui
 sudo apt-get -y install checkinstall pkg-config yasm
 
-     **************************************************
+     ********* ATLAS holds the world on his shoulders **************
     -- ATLAS from distro works, but is generic. Build your own from recent Source to 
-    ensure it is 'tuned' to your CPU.  First download LAPACK-x.x.x.tgz, then
+    ensure it is 'tuned' to your CPU.  First download 'lapack-3.5.0.tgz' (or more recent) then
+    	(set cpu core frequencies to to full-on)
     	- echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor >/dev/null
-        - get atlas: http://sourceforge.net/projects/math-atlas/files/
+        (get atlas source)
+        - http://sourceforge.net/projects/math-atlas/files/
         - decompress to ~/ATLAS
         - mkdir ~/ATLAS/build
     A sample ATLAS configure line (run from '~/ATLAS/build/'): 
         ../configure -D c -DPentiumCPS=3401 -Si archdef 0 --shared \
 	        --with-netlib-lapack-tarfile=/home/suber/Downloads/lapack-3.5.0.tgz
         
-    make              ! tune and compile library (can take 30+ minutes)
-    make check        ! perform sanity tests
-    make ptcheck      ! checks of threaded code for multiprocessor systems
-    make time         ! provide performance summary as % of clock rate
-    (sudo) make install      ! Copy library and include files to other directories
+    make              		! autotune and compile library (can take 10-120 minutes)
+    make check        		! perform build sanity tests
+    make ptcheck      		! checks of threaded code for multiprocessor systems
+    make time         		! provide performance summary as % of clock rate
+    (sudo) make install      	! Copy library and include files to other directories
     **************************************************
     
     -- if building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
         -- make, make install (takes a little while)
-    -- Numpy -newest sometimes has good improvements over distro version
+    Building your own ATLAS / OpenBLAS has a nice quickening effect on arrays & Numpy arrays
+    -- Numpy -newest sometimes has other good improvements over distro version
         - git clone https://github.com/numpy/numpy.git
         - cd numpy
         - python setup.py build --fcompiler=gnu95
@@ -96,12 +99,14 @@ Here (finally) is the buildable source for "Clp" - Coin-or Linear Problem Solver
 
 http://www.coin-or.org/download/source/Clp/Clp-1.15.6.tgz
 
-	-- Clp has very standard build from source dir: 
+	-- Clp has very standard build from source dir as follows: 
 	-- ./configure, make -j4, make check, make test, sudo make install
 
 sudo apt-get -y remove ffmpeg x264 libx264-dev
 
-sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev 
+sudo apt-get -y install libtbb-dev liborc-dev
+
+sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev libjasper-runtime libjasper1
 
 sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev
 
@@ -109,11 +114,9 @@ sudo apt-get -y install doxygen
 
 sudo apt-get install libsqlite0 sqlite sqlite3 python-sphinx libsphinxbase1 libsphinxbase-dev latex2html ant ant-contrib 
 
-sudo apt-get -y install libjasper-runtime libjasper1 libilmbase-dev openexr exrtools libopenexr-dev
+sudo apt-get -y install libilmbase-dev openexr exrtools libopenexr-dev
 
 sudo apt-get -y install libbz2-dev
-
-sudo apt-get -y install libtbb-dev liborc-dev
 
 sudo apt-get -y install libgtk2.0-dev libwebp4 libwebp-dev webp
 
@@ -135,27 +138,30 @@ sudo apt-get -y install libxine2-dev
 
 ----- the above libxcb stuff  somehow is not fully covered by anything else. ----------
 
-    --- If playing with video drivers, be ready to loose everything on the partition ---
-    --- Some Concepts: GRUB - fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7 - service lightdm stop
-    -- it is nice to have a way to 'put it back like it was.' consider this:
-    http://www.fsarchiver.org/QuickStart
-    or better yet (your own script / plan) to use 'rsync'
-
-
 #####  WARNING  ########  VIDEO DRIVER ZONE ###################
+
+    --- If playing with video drivers, be ready to loose everything on the partition ---
+    --- Some Concepts for recovery: while booting, hold down <Shift> to GRUB boot
+    --- for moving drives & partitions, understand: fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7
+    -- it is nice to have a way to 'put it back like it was.' consider this:
+    your own script / plan to use 'rsync' based ideas like 'duplicity' & 'deja-dup'
 
 --- At least have another way to get on-line and look stuff up ---
 
-    Very condensed NVIDIA driver / CUDA-5.5 install instructions:
-    1-6-14 UPDATE - recent PPA version seems to be made for ubuntu 14.0x or I don't
-    understand what... It breaks X windows, I loose some GL stuff...
-    I think it is made for kernel 3.13.xx but salamander is on 3.11.  
-    Nvidia d/l drivers seem to be the only way to fix.  
+    Very condensed NVIDIA driver / CUDA-5.5 / 6.0 install instructions:
+    First go to Nvidia's driver download pages, Read the features of the Beta version.
+    If you can live without the Beta features get the 'long term support' stable version
     Use ctrl-alt-f1 
+    enter login & password at text prompts
     - sudo service lightdm stop
-    run the downloaded Nvidia installer, NOT package managed version, ok ok ok 
+    run your Downloaded 'binary' 'proprietary' Nvidia installer (April 16, 2014 we're on 337.12)
+    - sudo chmod +x ~/Downloads/NVIDIA-Linux-x86_64-337.12.run
+    - sudo ~/Downloads/NVIDIA-Linux-x86_64-337.12.run
+    ok,ok,ok,ok,yes,accept,blah.
     - sudo service lightdm start 
-    - back in business.  Ignore Below until this trouble clears up.
+    Back in business.  Ignore Below until this trouble clears up. In fact I'd stick with Nvidia for the
+    forseeable future as it just seems easier to recover when this 'proprietary' kind of install
+    goes wrong - and Nvidia is seemingly doing a good job of Linux support now, in 2014.
     
     I would NOT install the PPA right now
     
@@ -178,18 +184,19 @@ then use package-manager, like synaptic (sudo apt-get install synaptic) or aptit
     --trouble? make sure the ppa is added & you have hit update since ppa was added & that the new 
     address was contacted by the update
 
-    export PATH=/usr/local/cuda-5.5/bin:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-5.5/lib64:$LD_LIBRARY_PATH
+    export PATH=/usr/local/cuda-6.0/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-6.0/lib64:$LD_LIBRARY_PATH
 
 ####  NVIDIA STUFF + Silly Salamander or Reckless Racoon = DANGEROUS  ########
 (leaving danger zone)
-        
+    BUT we still need to compile CUDA files   
     -- gcc 4.4 WAS needed for Ubuntu 13.04
     -- gcc 4.7.x has worked for 13.10:
             other recommendations for compilation of cuda 5.5 on various OS are on:
         http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#linux-5-5
             (though this is getting a little long-in-the-tooth)
-    
+To ensure the proper compilers are available:
+
 sudo update-alternatives --remove-all gcc
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 20
@@ -198,18 +205,18 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 50
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60
 
-sudo update-alternatives --config gcc   # choose 4.4, 4.7.x or 4.8 for CUDA 5.5 compilation
+sudo update-alternatives --config gcc   # choose 4.4, 4.7.x or 4.8 for CUDA 5.5/6.0 compilation
 
     -- below link-up may be outdated... but maybe not
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/libglut.so
 
-(some packages added on later)
+(below are some extra packages added on later)
 
 sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
 
 ####  QT5 Section  ####
-
+	(QT4 or 5 takes a while to build. consider distro packages)
     ---if in need of latest QT5 git clone git://gitorious.org/qt/qt5.git qt5
 
 cd qt5
@@ -252,39 +259,43 @@ sudo apt-get install oracle-java7-set-default
     --BTW this site is useful for many things distro related:
     http://www.webupd8.org/
 
-(if you were using 4.4 to compile CUDA switch back to 4.8 now)
+(if you were using gcc 4.4 or 4.7 to compile CUDA switch back to 4.8 now)
 
 -sudo update-alternatives --config gcc
 
 ........ clone into OpenCV repo (default branch is master) .........
+From ~/ i.e. (home/$USER)
 
 git clone https://github.com/Itseez/opencv.git
 
-    -- Git Noob? Do this from your 'home-dir'. '/home/your_user_name' = '~' = what I call 'home-dir'
-    -- Git makes /opencv and puts all the stuff there.  Now back out (type 'cd ..') and:
-
 git clone https://github.com/Itseez/opencv_extra.git
 
--- The above are NOT the 'extra modules'  Quite an unfortunate name. Intended 'extras' are next:
+-- The above are NOT the 'extra modules'  Quite an unfortunate name. Intended 'extra modules' are:
 
 git clone https://github.com/Itseez/opencv_contrib
 
--- include the optional 'extras' in cmake-gui under OPENCV_EXTRA_MODULES_PATH --> ~/opencv_contrib/modules
+-- point to the optional 'extras' option in cmake-gui under OPENCV_EXTRA_MODULES_PATH --> ~/opencv_contrib/modules
 
 cd opencv
 
-recommended option = git checkout 2.4
+recommended option: git checkout 2.4
+developer's shining new untested toys: git checkout master
+some other options: git branch -h
+(then checkout the branch)
 
+now from ~/opencv/
 mkdir build
 
 cd build
 
+(here is where we select the options to be built in to our OPENCV MAXIMUM-BUILD!!!)
 cmake-gui .
 
     -- Some cmake-gui opencv build hints:
     -- master vs 2.4 - some of the following only apply to 'master' builds (~/opencv$ git checkout master)
     -- Don't go all OCD trying to fill in everything before you hit 'configure' at least once.
-    -- Initially, check the two boxes in top area to 'group entries' and 'show advanced'  That wil organize them a bit.
+    -- upon opening cmake-gui, check the two boxes in top area to:
+    	'group entries' and 'show advanced'  That wil organize the hundreds of options a bit.
     -- MAKE: don't use fast-math for GCC or CUDA unless you probably don't need this guide & know better. eg:
     -- http://stackoverflow.com/questions/11507440/does-use-fast-math-option-translate-sp-multiplications-to-intrinsics
     -- Don't check 'download tbb' up top if you already have it, but make sure the path is true after a 'config'
@@ -293,24 +304,26 @@ cmake-gui .
     -- MAKE: do check mark all of the SSE instruction sets (and AVX) if you have a modern non-ARM CPU
     -- After checking options you can press configure as many times as needed.  Sometimes the script finds things.
     -- CMAKE-gui: Just because the red highlight goes away doesn't mean 'solved.' Look to see if the paths are filled.
-    -- If Intel, you still can use Open CL - but you benefit MORE from an active TBB & IPP than AMD users.
+    -- If Intel-CPU / Nvidia GPU, you still use some OpenCL - you benefit MORE from an active TBB & IPP than AMD users.
     -- QT info can be tricky. If using QT5 don't worry about that massive bunch of QT4 stuff that seems incomplete
     -- X11 options will always have a few missing, but you can ignore that to no ill effect. Trying to hunt down
-        those 'X' items will probably mess up a chain of dependencies specific to your setup.
-    -- OPENEXR - As long as you see a version number (currently 1.71 from packages) for it under MEDIA I/O you are good.
-    -- You may select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
+        those 'X' items will probably mess up a chain of dependencies specific to your functional setup.
+    -- OPENEXR: As long as you see a version number (currently 1.71 from packages) for it under MEDIA I/O you are good.
+    -- WITH: You may select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
     -- CUDA: When looking for 'missing' libraries, dirs under: /usr/local/cuda or /usr/local/cuda-5-5 are your friend. 
     -- also look in /usr/lib/nvidia-updates for those pesky missing *.so libs
-    -- CUDA: there is a blank after Generation. click there and choose 'Kepler'if you have a modern nvidia card.
+    -- CUDA: there is a blank after Generation. 'Fermi' is older than 'Kepler.' 
+    	Yes, Even though Enrico Fermi is a quantum physics guy and Johans Kepler was wearing a poofy shirt most of his life,
+    	the more modern Nvidia GPU is of the 'Kepler' generation.
     -- CUDA: UNcheck attach to target
     -- QT5:the qmake executable = ~/qt5/qtbase/bin/qmake
     -- QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
     -- CMAKE after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit that final 'generate'
     -- OPENGL_xmesa_INCLUDE = /usr/lib/x86_64-linux-gnu/mesa  For some reason it has trouble finding that one.
-    -- CUDA the many cuda addresses may not show up right away. if you get the script started with nvcc, 
+    -- CUDA: the many cuda addresses may not show up right away. if you get the script started with nvcc, 
         then 'configure' sometimes it finds the rest.
-    -- Clp - libcoin - I've never been sure this is active. There are conflicting messages. Its a minor thing.
-    -- Here are a few typical CUDA paths to get YOU started. I think all the others are along these paths:
+    -- Clp - libcoin - I've never been sure this is active. There are conflicting messages. Machine Learning indeed.
+    -- Here are a few typical CUDA paths to get YOU started. However, recent installs have not needed these hints:
         CUDA_CUDART_LIBRARY --> /usr/local/cuda-5.5/lib64/libcudart.so
         CUDA_NVCC_EXECUTABLE --> /usr/local/cuda-5.5/bin/nvcc
         CUDA_nvcuvid_LIBRARY --> /usr/lib/nvidia-331/libnvcuvid.so
@@ -318,8 +331,8 @@ cmake-gui .
         CUDA_CUDA_LIBRARY --> /usr/lib/nvidia-331/libcuda.so
     -- Of course, you can't just cut n' paste the above - drivers & versions will change
 
----- point to a bunch of stuff, select a bunch of options, configure, configure, configure, generate, exit---
-
+---- you have pointed to a bunch of stuff, selected a bunch of options, configure, configure, configure, generate, exit---
+(now back at the prompt)
 make -j4
 
 sudo make install
@@ -342,8 +355,8 @@ sudo ldconfig
     
     --- (here you will get a whole bunch of info to verify the build. ctrl-D to exit) ---
 
-When I started using OpenCV & Python I looked all over & never found this info in one spot. I was a Windows user. I had no idea how the linux world worked. I still have so much to learn. I went from driving a mini-van while wearing a motorcycle helmet - backwards - to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.
-Think of this as some gasoline. Or a road atlas. For your openCV adventure... Trial, error - my wrong turns can be your paths-not-taken.
+When I started using OpenCV & Python I looked all over & never found this info in one spot. I was a Windows user. I had no idea how the linux world worked. I still have a lot to learn. I went from driving a mini-van while wearing a motorcycle helmet to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.
+Think of this as some leaded gasoline. Or a giant road atlas. For your openCV adventure... Trial, error - my wrong turns can be your paths-not-taken.
 
-If you spot any smokies, pick up the horn & give me a shout!
+If you spot any smokies, pick up the horn & give me a holler, I'll try to have my ears on!
     
