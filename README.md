@@ -136,7 +136,7 @@ sudo apt-get -y install libxine-dev
 
 sudo apt-get -y install libxine2-dev 
 
------ the above libxcb stuff  somehow is not fully covered by anything else. ----------
+----- the above libxcb dev stuff is suggested by qt5 build. ----------
 
 #####  WARNING  ########  VIDEO DRIVER ZONE ###################
 
