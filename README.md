@@ -1,6 +1,6 @@
-###  OpenCV-Max-Build-Package CUDA 6.0 Ubuntu 13.10-  ###
+###  OpenCV-Max-Build-Package CUDA 6.0 Ubuntu 14.xx-  ###
 
-    -- April 16, 2014: Keep using Nvidia provided proprietary drivers & cuda direct d/l.
+    -- May 20, 2014: Keep using Nvidia provided proprietary drivers & cuda direct d/l.
         -- the only downside to that is that when your linux kernel is updated, after an eventual reboot, 
         -- when confronted by the dreaded 'X' cursor on a blank, black, low-res GUI you can't escape:
             Ctrl-Alt-f1, enter login, pass
@@ -25,17 +25,18 @@ You have to get a (free-of-charge) license code from Intel:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
-IPP used to be more crucial, but OpenCL is now picking up some of the parallelization chores.
+IPP has received some love from the developers after OpenCL started to take over some chores.
 Its benefit will depend on what your applications are and what other libraries are providing 
 basic functions like resizing a picture or computing the FFT.
-IPP is only free-of-charge for non-commercial use.
-If using IPP, use 7.1 version with static add-ons.
+IPP is only free-of-charge for non-commercial use. My experience is that OpenCL is comperable.
+Once one needed to use IPP 7.1 version with static add-ons, but some changes I have not tested might
+have made that nugget obsolete.
 8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
 
 TBB (Intel Threaded Building Blocks) though, is very much a must-have for your Intel CPU - 
 (and it is open-source now) - use it!   (package is in the list below) 
 
-The following Build is only tested on Ubuntu 13.10, CUDA 5.5, Intel cpu, with most everything turned on
+The following Build is only tested on Ubuntu 14.xx CUDA 6.0, Intel cpu, with most everything turned on
 
     --- modern Debian-based installs should work very similarly   -----
     --- I would do these lines 1 or 2 at a time to witness results ----
