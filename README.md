@@ -53,10 +53,9 @@ sudo apt-get -y install libeigen3-dev libblas3 libblas-dev liblapack3 liblapack-
 
 sudo apt-get -y install python-dev python-pip python-numpy python-gevent python-levenshtein
 
-sudo pip install gmpy grequests requests
+sudo pip install gmpy grequests requests cython
 
-    -- gmpy is not strictly needed for opencv but I use it for fast popcount in python
-    -- gevent and grequests are optional as well, just here for convenience
+    -- gmpy -- cython are not strictly needed for opencv, but damn great
 
 sudo apt-get -y install git cmake cmake-gui
 sudo apt-get -y install checkinstall pkg-config yasm
