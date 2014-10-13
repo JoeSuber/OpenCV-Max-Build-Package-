@@ -65,13 +65,13 @@ sudo apt-get -y install checkinstall pkg-config yasm
     From the README.debian file:
 
 Building your own optimized packages of Atlas is straightforward. Just get the sources of the package and its build-dependencies:
-# apt-get source atlas
-# apt-get build-dep atlas
-# apt-get install devscripts
+"# apt-get source atlas"
+"# apt-get build-dep atlas"
+"# apt-get install devscripts"
 
 and type the following from the atlas source subdir:
 
-# fakeroot debian/rules custom
+"# fakeroot debian/rules custom"
 
 it should produce a package called:
 
