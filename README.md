@@ -61,25 +61,24 @@ sudo apt-get -y install git cmake cmake-gui
 sudo apt-get -y install checkinstall pkg-config yasm
 
      ********* ATLAS holds the world on his shoulders **************
-    -- ATLAS from distro works, but is generic. Build your own from recent Source to 
-    ensure it is 'tuned' to your CPU.  First download 'lapack-3.5.0.tgz' (or more recent) then
-    	(set cpu core frequencies to to full-on)
-    	- echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor >/dev/null
-        (get atlas source)
-        - http://sourceforge.net/projects/math-atlas/files/
-        - decompress to ~/ATLAS
-        - mkdir ~/ATLAS/build
-    A sample ATLAS configure line (run from '~/ATLAS/build/'): 
-        ../configure -D c -DPentiumCPS=3401 -Si archdef 0 --shared \
-	        --with-netlib-lapack-tarfile=/home/suber/Downloads/lapack-3.5.0.tgz
-        
-    make              		! autotune and compile library (can take 10-120 minutes)
-    make check        		! perform build sanity tests
-    make ptcheck      		! checks of threaded code for multiprocessor systems
-    make time         		! provide performance summary as % of clock rate
-    (sudo) make install      	! Copy library and include files to other directories
-    **************************************************
-    
+    -- ATLAS from distro works, but is generic. Build your own from recent Source to ensure it is 'tuned' to your CPU.
+    From the README.debian file:
+
+Building your own optimized packages of Atlas is straightforward. Just get the sources of the package and its build-dependencies:
+# apt-get source atlas
+# apt-get build-dep atlas
+# apt-get install devscripts
+
+and type the following from the atlas source subdir:
+
+# fakeroot debian/rules custom
+
+it should produce a package called:
+
+../libatlas3-base_*.deb
+
+which is optimized for the architecture Atlas has been built on. Then install the package using dpkg -i.
+
     -- if building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
         -- make, make install (takes a little while)
