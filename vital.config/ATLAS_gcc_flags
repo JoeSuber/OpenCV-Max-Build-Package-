@@ -1,0 +1,54 @@
+for use from custom install dir 'build/' inside downloaded ATLAS dir. ver 3.11.x
+
+cpufreq-set -g performance -c 0
+cpufreq-set -g performance -c 1
+cpufreq-set -g performance -c 2
+cpufreq-set -g performance -c 3
+
+../configure -b 64 -D c -DPentiumCPS=3601 --prefix=/usr/local/atlas --with-netlib-lapack-tarfile=/home/suber1/Downloads/lapack-3.5.0.tgz --shared
+ make build
+ make check
+ make time
+ sudo make install
+
+--- 	OR (perhaps)	----
+--- for build from .debs ---
+
+sudo apt-get build-dep atlas
+sudo apt-get source atlas
+cd atlas-*
+sudo fakeroot debian/rules custom
+cd ..
+ls libatlas*.deb
+
+Then, for each of the entries listed by the ls command (there may be a quicker way to do it, using "*"), type:
+sudo dpkg -i <filename here>.deb
+
+-rw-r--r--  1 root   root   3292042 Nov  3 20:57 libatlas3-base_3.10.1-4+custom1_amd64.deb
+-rw-r--r--  1 root   root     21842 Nov  3 20:57 libatlas3gf-base_3.10.1-4+custom1_all.deb
+-rw-r--r--  1 root   root   3468804 Nov  3 20:57 libatlas-base-dev_3.10.1-4+custom1_amd64.deb
+-rw-r--r--  1 root   root     41466 Nov  3 20:57 libatlas-dev_3.10.1-4+custom1_all.deb
+-rw-r--r--  1 root   root     22438 Nov  3 20:57 libatlas-doc_3.10.1-4+custom1_all.deb
+-rw-r--r--  1 root   root   2734744 Nov  3 20:58 libatlas-test_3.10.1-4+custom1_amd64.deb
+
+--------------------------------------------------------------
+----		sqlite3 with full-text-search and threads  ---
+--------------------------------------------------------------
+
+SQLITE_ENABLE_ICU  
+
+SQLITE_ENABLE_FTS4
+
+SQLITE_ENABLE_FTS3_PARENTHESIS
+
+SQLITE_ENABLE_FTS3
+
+SQLITE_CONFIG_MULTITHREAD
+
+ sudo apt-get install libreadline-dev
+
+./configure CPPFLAGS="-DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_CONFIG_MULTITHREAD" CFLAGS="-Os -DSQLITE_OMIT_TRIGGERS"
+
+
+CFLAGS="-Os -DSQLITE_OMIT_TRIGGERS -DSQLITE_ENABLE_ICU"
+./configure <configure options>

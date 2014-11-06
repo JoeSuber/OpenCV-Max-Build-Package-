@@ -1,48 +1,37 @@
-###  OpenCV-Max-Build-Package CUDA 6.0 Ubuntu 14.xx-  ###
+###  OpenCV-Max-Build-Package CUDA 6.5 Ubuntu 14.xx-  ###
 
     -- May 20, 2014: Keep using Nvidia provided proprietary drivers & cuda direct d/l.
         -- the only downside to that is that when your linux kernel is updated, after an eventual reboot, 
         -- when confronted by the dreaded 'X' cursor on a blank, black, low-res GUI you can't escape:
             Ctrl-Alt-f1, enter login, pass
             sudo service lightdm stop
-            (find & run the Nvidia driver installer wherever you saved it.  You DID keep it around, right?
+            (find & run the Nvidia driver installer wherever you saved it.
             re-install it.)
             sudo service lightdm start
             (breath easy)
-    -- Jan 6 2014 note: After a Jan 2nd xorg-edgers update blew up my Dec. install I went through this guide
-    --- Everything worked! With the exception that you should avoid the ppa-based nvidia cuda and video 
-    --- drivers and simply install the 5.5.22 cuda version d/l from the nvidia website.
 
-This isn't a build script, but it has a lot of cut & paste. There is, I think, much need for user intervention and 
-important choices to be made as you adjust for particular apps and hardware: your "Maximum Build."
+Your Maximum Build:
 
-    -- The ordering is useful, though probably not perfect.
-    -- Helps a new installer avoid some pitfalls, an old installer try some new tricks.
-    -- Helps me to not forget small - but crucial - things - (as often).
-    
+    -- The ordering is useful, perhaps not perfect.
+    -- Helps a noob avoid some pitfalls.
+
 IPP (Intel Integrated Performance Primitives) library is not on the list due to a lack of package-managed install.
 You have to get a (free-of-charge) license code from Intel:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
 IPP has received some love from the developers after OpenCL started to take over some chores.
-Its benefit will depend on what your applications are and what other libraries are providing 
-basic functions like resizing a picture or computing the FFT.
-IPP is only free-of-charge for non-commercial use. My experience is that OpenCL is comperable.
-Once one needed to use IPP 7.1 version with static add-ons, but some changes I have not tested might
-have made that nugget obsolete.
-8.0 leaves out certain depreciated parts that OpenCV still needs (as of Nov 17, 2013)
+A subset of it will download automatically. The asynchronous libs don't, and have given me trouble.
 
 TBB (Intel Threaded Building Blocks) though, is very much a must-have for your Intel CPU - 
-(and it is open-source now) - use it!   (package is in the list below) 
+(and it is open-source now) TBB now downloads without incident - easy!
 
-The following Build is only tested on Ubuntu 14.xx CUDA 6.0, Intel cpu, with most everything turned on
+The following Build is only tested on Ubuntu 14.xx CUDA 6.5, Intel cpu, with most everything turned on
 
-    --- modern Debian-based installs should work very similarly   -----
+    --- Linux mint 17 sort-of works  -----
     --- I would do these lines 1 or 2 at a time to witness results ----
 
 sudo apt-get upgrade
-
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 
 sudo apt-get -y install build-essential gcc g++ linux-headers-generic linux-source
@@ -53,41 +42,46 @@ sudo apt-get -y install libeigen3-dev libblas3 libblas-dev liblapack3 liblapack-
 
 sudo apt-get -y install python-dev python-pip python-numpy python-gevent python-levenshtein
 
-sudo pip install gmpy grequests requests cython
+sudo pip install gmpy requests grequests cython ipython
 
-    -- gmpy -- cython are not strictly needed for opencv, but damn great
+    -- above pip items are not strictly needed for opencv, but damn great
 
-sudo apt-get -y install git cmake cmake-gui
-sudo apt-get -y install checkinstall pkg-config yasm
+sudo apt-get -y install git cmake cmake-gui checkinstall pkg-config yasm
 
-     ********* ATLAS holds the world on his shoulders **************
-    -- ATLAS from distro works, but is generic. Build your own from recent Source to ensure it is 'tuned' to your CPU.
-    From the README.debian file:
+     	-- ********* ATLAS holds up the world **************
+    	-- ATLAS from distro works, but is generic. 
+	-- Build your own from recent Source to ensure it is 'tuned' to your CPU.
+	-- Takes 10-20 minutes
 
-Building your own optimized packages of Atlas is straightforward. Just get the sources of the package and its build-dependencies:
-"# apt-get source atlas"
-"# apt-get build-dep atlas"
-"# apt-get install devscripts"
+The sources of the package and its build-dependencies:
 
-and type the following from the atlas source subdir:
+sudo apt-get source atlas
+sudo apt-get build-dep atlas
+sudo apt-get install devscripts
 
-"# fakeroot debian/rules custom"
+find the atlas-dir and type the following from the atlas source subdir:
 
-it should produce a package called:
+sudo fakeroot debian/rules custom
+
+it should produce packages called:
 
 ../libatlas3-base_*.deb
 
-which is optimized for the architecture Atlas has been built on. Then install the package using dpkg -i.
+Then install the package using: 
+
+dpkg -i" (for each .deb)
 
     -- if building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
         -- make, make install (takes a little while)
-    Building your own ATLAS / OpenBLAS has a nice quickening effect on arrays & Numpy arrays
-    -- Numpy -newest sometimes has other good improvements over distro version
+
+    -- Numpy sometimes has other good improvements over distro version
+	- may need to edit "site.cfg" to point to the proper ATLAS or OpenBLAS location
         - git clone https://github.com/numpy/numpy.git
         - cd numpy
         - python setup.py build --fcompiler=gnu95
         - sudo python setup.py install
+
     -- Then, test, assuming nose is installed (sudo pip install nose):
         - cd ..
         - python -c 'import numpy; numpy.test()'
@@ -131,8 +125,6 @@ sudo apt-get -y install libgstreamer*
 
 sudo apt-get -y install gstreamer*
 
-sudo apt-get -y install libxine-dev
-
 sudo apt-get -y install libxine2-dev 
 
 ----- the above libxcb dev stuff is suggested by qt5 build. ----------
@@ -140,20 +132,16 @@ sudo apt-get -y install libxine2-dev
 #####  WARNING  ########  VIDEO DRIVER ZONE ###################
 
     --- If playing with video drivers, be ready to loose everything on the partition ---
-    --- Some Concepts for recovery: while booting, hold down <Shift> to GRUB boot
-    --- for moving drives & partitions, understand: fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7
-    -- it is nice to have a way to 'put it back like it was.' consider this:
-    your own script / plan to use 'rsync' based ideas like 'duplicity' & 'deja-dup'
+    --- Some concepts for recovery: while booting, hold down <Shift> to GRUB boot, select recovery mode
+    --- for moving partitions, re-installs, understand: fstab - sudo nano - ctrl-alt-f1 / ctrl-alt-f7
+    ---  consider using 'rsync' based ideas like 'duplicity' & 'deja-dup'
+	--- At least have another way to get on-line and look stuff up ---
 
---- At least have another way to get on-line and look stuff up ---
-
-    Very condensed NVIDIA driver / CUDA-5.5 / 6.0 install instructions:
-    First go to Nvidia's driver download pages, Read the features of the Beta version.
-    If you can live without the Beta features get the 'long term support' stable version
+	Download recent drivers & cuda. chmod +x them.
     Use ctrl-alt-f1 
     enter login & password at text prompts
     - sudo service lightdm stop
-    run your Downloaded 'binary' 'proprietary' Nvidia installer (April 16, 2014 we're on 337.12)
+    run your Downloaded 'binary' 'proprietary' Nvidia installer
     - sudo chmod +x ~/Downloads/NVIDIA-Linux-x86_64-337.12.run
     - sudo ~/Downloads/NVIDIA-Linux-x86_64-337.12.run
     ok,ok,ok,ok,yes,accept,blah.
@@ -164,53 +152,27 @@ sudo apt-get -y install libxine2-dev
     
     I would NOT install the PPA right now
     
-    FOR NOW, DO NOT USE:
-    sudo add-apt-repository ppa:xorg-edgers/ppa 
-    sudo apt-get update
-    sudo apt-get install <package name>
-    -- Nov 18 2013 that meant:  nvidia-331_331.20-0ubuntu1~xedgers~saucy1_amd64.deb
+    	FOR NOW, DO NOT USE:
+    	sudo add-apt-repository ppa:xorg-edgers/ppa 
+    	sudo apt-get update
+    	sudo apt-get install <package name>
  
- FOR NOW, DO NOT USE:  
-add a .deb install ppa from the official CUDA page:
+ 	FOR NOW, DO NOT USE:  
+	add a .deb install ppa from the official CUDA page:
+	https://developer.nvidia.com/cuda-downloads
+	then use package-manager, like synaptic (sudo apt-get install synaptic) or aptitude, to run the update.
 
-    https://developer.nvidia.com/cuda-downloads
-    select this -> cuda-repo-ubuntu1210   or  the 1204 version... CUDA 6 is coming
+REMEMBER: When using Synaptic et. al. select Meta-Packages, not individual components.
+TROUBLE w/ PACKAGES:  Make sure the ppa is added & you have hit update since ppa was added & that the new address was contacted by the update
 
- FOR NOW, DO NOT USE:
-then use package-manager, like synaptic (sudo apt-get install synaptic) or aptitude, to run the update.
+    export PATH=/usr/local/cuda-6.5/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:$LD_LIBRARY_PATH
 
-    --when using Synaptic et. al. select Meta-Packages, not individual components
-    --trouble? make sure the ppa is added & you have hit update since ppa was added & that the new 
-    address was contacted by the update
-
-    export PATH=/usr/local/cuda-6.0/bin:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-6.0/lib64:$LD_LIBRARY_PATH
-
-####  NVIDIA STUFF + Silly Salamander or Reckless Racoon = DANGEROUS  ########
-(leaving danger zone)
-    BUT we still need to compile CUDA files   
-    -- gcc 4.4 WAS needed for Ubuntu 13.04
-    -- gcc 4.7.x has worked for 13.10:
-            other recommendations for compilation of cuda 5.5 on various OS are on:
-        http://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html#linux-5-5
-            (though this is getting a little long-in-the-tooth)
-To ensure the proper compilers are available:
-
-sudo update-alternatives --remove-all gcc
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.4 20
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 50
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60
-
-sudo update-alternatives --config gcc   # choose 4.4, 4.7.x or 4.8 for CUDA 5.5/6.0 compilation
-
-    -- below link-up may be outdated... but maybe not
+#### LEAVING VIDEO DRIVER ZONE #####
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/libglut.so
 
-(below are some extra packages added on later)
+(below are some extra packages added on outside the scope of opencv)
 
 sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
 
@@ -243,7 +205,7 @@ make -j4
     git submodule sync
     git submodule update --recursive
 
-#### how about some java 7? in a ppa! ####
+#### how about some java 7-8? in a ppa! ####
 
 sudo add-apt-repository ppa:webupd8team/java
 
@@ -251,19 +213,23 @@ sudo apt-get update
 
 sudo apt-get install oracle-java7-installer
 
-sudo update-java-alternatives -s java-7-oracle
+sudo apt-get install oracle-java8-installer
 
-sudo apt-get install oracle-java7-set-default
+sudo update-java-alternatives -s java-8-oracle
+
+sudo apt-get install oracle-java8-set-default
 
     --BTW this site is useful for many things distro related:
     http://www.webupd8.org/
 
-(if you were using gcc 4.4 or 4.7 to compile CUDA switch back to 4.8 now)
+#### java ppa ###
+
+(if you were using gcc 4.4 or 4.7 to compile an old CUDA switch back to 4.8 now)
 
 -sudo update-alternatives --config gcc
 
 ........ clone into OpenCV repo (default branch is master) .........
-From ~/ i.e. (home/$USER)
+cd ~
 
 git clone https://github.com/Itseez/opencv.git
 
@@ -282,21 +248,24 @@ developer's shining new untested toys: git checkout master
 some other options: git branch -h
 (then checkout the branch)
 
-now from ~/opencv/
+cd ~/opencv
+
 mkdir build
 
 cd build
 
 (here is where we select the options to be built in to our OPENCV MAXIMUM-BUILD!!!)
+
 cmake-gui .
 
+(put in the paths in the gui forms at the top)
+
     -- Some cmake-gui opencv build hints:
-    -- master vs 2.4 - some of the following only apply to 'master' builds (~/opencv$ git checkout master)
+    -- master vs 2.4 - notice different options
     -- Don't go all OCD trying to fill in everything before you hit 'configure' at least once.
     -- upon opening cmake-gui, check the two boxes in top area to:
-    	'group entries' and 'show advanced'  That wil organize the hundreds of options a bit.
-    -- MAKE: don't use fast-math for GCC or CUDA unless you probably don't need this guide & know better. eg:
-    -- http://stackoverflow.com/questions/11507440/does-use-fast-math-option-translate-sp-multiplications-to-intrinsics
+    	'group entries' and 'show advanced'  That wil organize the hundreds of options into sane categories.
+    -- MAKE: don't use fast-math for GCC or CUDA unless you probably don't need this guide & know better.
     -- Don't check 'DOWNLOAD TBB' up top if you already have it, but make sure the path is true after a 'config'
     -- uncheck CLAMBLAS and CLAMDFFT if yours is an Intel cpu
     -- JASPER: cmake never auto-fills the debug lib-path. Just copy the release path to DEBUG slot.
@@ -309,12 +278,11 @@ cmake-gui .
         those 'X' items will probably mess up a chain of dependencies specific to your functional setup.
     -- OPENEXR: As long as you see a version number (currently 1.71 from packages) for it under MEDIA I/O you are good.
     -- WITH: You may select nvidia options like nvcuuvd (video) and nvfft (fast Fourier transform) without selecting CUDA.
-    -- CUDA: When looking for 'missing' libraries, dirs under: /usr/local/cuda or /usr/local/cuda-5-5 are your friend. 
-    -- also look in /usr/lib/nvidia-updates for those pesky missing *.so libs
+    -- CUDA: When looking for 'missing' libraries, dirs under: /usr/local/cuda are your friend. 
+    -- when using xorg/ppa look in /usr/lib/nvidia-updates for those pesky missing *.so libs
     -- CUDA: there is a blank after Generation. 'Fermi' is older than 'Kepler.' 
     	Yes, Even though Enrico Fermi is a quantum physics guy and Johans Kepler was wearing a poofy shirt most of his life,
     	the more modern Nvidia GPU is of the 'Kepler' generation.
-    -- CUDA: UNcheck attach to target
     -- QT5:the qmake executable = ~/qt5/qtbase/bin/qmake
     -- QT-DIR options you want--> ~/qt5/qtbase/lib/cmake/Qt5... where ... are things like Concurrent, Core etc
     -- CMAKE after a 'configure' or 3, under MAKE, select Debug or Release build type before you hit that final 'generate'
@@ -322,7 +290,7 @@ cmake-gui .
     -- CUDA: the many cuda addresses may not show up right away. if you get the script started with nvcc, 
         then 'configure' sometimes it finds the rest.
     -- Clp - libcoin - I've never been sure this is active. There are conflicting messages. Machine Learning indeed.
-    -- Here are a few typical CUDA paths to get YOU started. However, recent installs have not needed these hints:
+    -- Here are a few typical CUDA paths in case they aren't auto-populated. However, recent installs have not needed these hints:
         CUDA_CUDART_LIBRARY --> /usr/local/cuda-5.5/lib64/libcudart.so
         CUDA_NVCC_EXECUTABLE --> /usr/local/cuda-5.5/bin/nvcc
         CUDA_nvcuvid_LIBRARY --> /usr/lib/nvidia-331/libnvcuvid.so
@@ -331,7 +299,10 @@ cmake-gui .
     -- Of course, you can't just cut n' paste the above - drivers & versions will change
 
 ---- you have pointed to a bunch of stuff, selected a bunch of options, configure, configure, configure, generate, exit---
+
 (now back at the prompt)
+(drum roll..)
+
 make -j4
 
 sudo make install
@@ -340,22 +311,26 @@ sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 
 sudo ldconfig
 
----- to verify that all worked, enter the python interpreter ----
+---- to verify that all worked, enter the ipython interpreter ----
 
-    python
-    
-                import cv2
-    
-                b = cv2.getBuildInformation().split('\n')
-    
-                for p in b:
-    
-                print p
-    
-    --- (here you will get a whole bunch of info to verify the build. ctrl-D to exit) ---
+ipython
 
-When I started using OpenCV & Python I looked all over & never found this info in one spot. I was a Windows user. I had no idea how the linux world worked. I still have a lot to learn. I went from driving a mini-van while wearing a motorcycle helmet to that black, 4-on-the-floor 6.6 litre 1978 Trans-Am complete with golden chicken & Gidget.
-Think of this as some leaded gasoline. Or a giant road atlas. For your openCV adventure... Trial, error - my wrong turns can be your paths-not-taken.
+[1] import numpy as np
 
-If you spot any smokies, pick up the horn & give me a holler, I'll try to have my ears on!
-    
+[2] import cv2
+
+[3] b = cv2.getBuildInformation().split('\n')
+
+[4] for p in b:
+    print p
+
+... (shows you the options of the build, what should be active) ...
+
+[5] dir(cv2)
+... 
+[6] dir(np)
+...
+(you can use ipython to look at all the (python) available method & function doc-strings, try them out)
+
+Let me know what needs to change!
+
