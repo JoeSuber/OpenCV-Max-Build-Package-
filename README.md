@@ -69,7 +69,7 @@ it should produce packages called:
 
 Then install the package using: 
 
-dpkg -i" (for each .deb)
+dpkg -i  (for each .deb)
 
     -- if building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
