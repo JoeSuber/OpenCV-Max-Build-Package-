@@ -1,30 +1,20 @@
 ###  OpenCV-Max-Build-Package CUDA 6.5 Ubuntu 14.xx-  ###
 
-    -- May 20, 2014: Keep using Nvidia provided proprietary drivers & cuda direct d/l.
-        -- the only downside to that is that when your linux kernel is updated, after an eventual reboot, 
-        -- when confronted by the dreaded 'X' cursor on a blank, black, low-res GUI you can't escape:
-            Ctrl-Alt-f1, enter login, pass
-            sudo service lightdm stop
-            (find & run the Nvidia driver installer wherever you saved it.
-            re-install it.)
-            sudo service lightdm start
-            (breath easy)
-
 Your Maximum Build:
 
     -- The ordering is useful, perhaps not perfect.
     -- Helps a noob avoid some pitfalls.
 
-IPP (Intel Integrated Performance Primitives) library is not on the list due to a lack of package-managed install.
-You have to get a (free-of-charge) license code from Intel:
+IPP (Intel Integrated Performance Primitives) has no package-managed install.
+You have to get a (free-of-charge) license code from Intel for the full kit:
 
     -- http://software.intel.com/en-us/non-commercial-software-development
     
-IPP has received some love from the developers after OpenCL started to take over some chores.
-A subset of it will download automatically. The asynchronous libs don't, and have given me trouble.
+A large subset of IPP will now download automatically as part of opencv.
+The asynchronous libs are what is missing, but have been troublesome anyway.
 
 TBB (Intel Threaded Building Blocks) though, is very much a must-have for your Intel CPU - 
-(and it is open-source now) TBB now downloads without incident - easy!
+(and it is open-source now) TBB now downloads without incident via opencv's make - easy!
 
 The following Build is only tested on Ubuntu 14.xx CUDA 6.5, Intel cpu, with most everything turned on
 
@@ -32,6 +22,7 @@ The following Build is only tested on Ubuntu 14.xx CUDA 6.5, Intel cpu, with mos
     --- I would do these lines 1 or 2 at a time to witness results ----
 
 sudo apt-get upgrade
+
 sudo apt-get -y install autoconf2.13 autoconf-archive gnu-standards
 
 sudo apt-get -y install build-essential gcc g++ linux-headers-generic linux-source
@@ -73,7 +64,7 @@ dpkg -i  (for each .deb)
 
     -- if building your own ATLAS, might as well get OpenBlas:
         - git clone git://github.com/xianyi/OpenBLAS
-        -- make, make install (takes a little while)
+        -- make, sudo make install (takes a little while, look in /opt/openblas)
 
     -- Numpy sometimes has other good improvements over distro version
 	- may need to edit "site.cfg" to point to the proper ATLAS or OpenBLAS location
@@ -121,9 +112,9 @@ sudo apt-get -y install freeglut3 freeglut3-dev build-essential \libx11-dev libx
 
 sudo apt-get -y install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
 
-sudo apt-get -y install libgstreamer* 
+sudo apt-get install gstreamer* 
 
-sudo apt-get -y install gstreamer*
+sudo apt-get install libgstreamer*
 
 sudo apt-get -y install libxine2-dev 
 
@@ -141,14 +132,14 @@ sudo apt-get -y install libxine2-dev
     Use ctrl-alt-f1 
     enter login & password at text prompts
     - sudo service lightdm stop
-    run your Downloaded 'binary' 'proprietary' Nvidia installer
+    Now run your Downloaded 'binary' 'proprietary' Nvidia installer:
     - sudo chmod +x ~/Downloads/NVIDIA-Linux-x86_64-337.12.run
     - sudo ~/Downloads/NVIDIA-Linux-x86_64-337.12.run
     ok,ok,ok,ok,yes,accept,blah.
     - sudo service lightdm start 
-    Back in business.  Ignore Below until this trouble clears up. In fact I'd stick with Nvidia for the
-    forseeable future as it just seems easier to recover when this 'proprietary' kind of install
-    goes wrong - and Nvidia is seemingly doing a good job of Linux support now, in 2014.
+    I'd stick with Nvidia-provided for the forseeable future as it 
+    seems easier to recover when this 'proprietary' kind of install goes wrong
+    Nvidia is seemingly doing a good job of Linux support now, in 2014.
     
     I would NOT install the PPA right now
     
@@ -172,7 +163,7 @@ TROUBLE w/ PACKAGES:  Make sure the ppa is added & you have hit update since ppa
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so.3 /usr/lib/libglut.so
 
-(below are some extra packages added on outside the scope of opencv)
+(below are some extra packages I add-on outside the scope of opencv)
 
 sudo apt-get install gtk-3.0 sox libsox-fmt-mp3
 
